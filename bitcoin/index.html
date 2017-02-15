@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Infos WebServices</title>
+		<link rel="icon" type="image/png" href="./asset/image/Logo_ESILV_reduit.png">
+		<link rel="stylesheet" href="./asset/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="./asset/css/material.css"/>
+		
+		<script>
+			function requetteApi(url, elementID)
+			{
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var myObj = this.responseText;
+					var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2);
+					document.getElementById(elementID).innerHTML = jsonPretty;
+				}
+			};
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+			}
+			
+			function homePageLoading()
+			{
+				url = "http://bitcoin.mubiz.com/info";
+				elementID = "demo";
+				requetteApi(url, elementID);
+				url = "http://bitcoin.mubiz.com/blockchaininfo";
+				elementID = "blockchain_info";
+				requetteApi(url, elementID);
+				url = "http://bitcoin.mubiz.com/peerinfo";
+				elementID = "peer_info";
+				requetteApi(url, elementID);
+				url = "http://bitcoin.mubiz.com/mininginfo";
+				elementID = "mining_info";
+				requetteApi(url, elementID);	
+			}
+			homePageLoading();
+		</script>
+	</head>
+	
+	<body>
+	
+		<!--########################################################
+		#
+		#
+		#					Navigation bar 
+		#
+		#
+		############################################################ -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="https://coupetm.github.io/">
+				<img id="home" alt="Brand" src="./asset/image/home.png" >
+				</a>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="./index.html">TP 1</a></li>
+						<li><a href="#">TP 2</a></li>
+						<li><a href="#">TP 3</a></li>
+						<li><a href="#">TP 4</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="https://www.creative-tim.com/product/material-kit?ref=presentation-page">A propos</a></li>
+						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
+						<li> 
+							<a class="navbar-brand" href="http://www.esilv.fr/">
+								<img id="logo_esilv" alt="Brand" src="./asset/image/Logo_ESILV.png" >
+							</a> 
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		
+		<div class="card card-signup" id="top">
+			<form class="form" method="" action="">
+				<div class="header header-primary text-center">
+					<h4>Données récupérées</h4>
+				</div>
+				
+				<div class="row">
+			<div class="col-lg-12 col-xs-6">
+				<pre>
+					<details>
+						<summary>Informations WebService (Mubiz)</summary>
+						<code id="demo" class="json kljs"></code>
+					</details>
+					<details>
+						<summary>Informations blockchain</summary>
+						<code id="blockchain_info" class="json kljs"></code>
+					</details>
+					<details>
+						<summary>Informations peer</summary>
+						<code id="peer_info" class="json kljs"></code>
+					</details>
+					<details>
+						<summary>Informations mining</summary>
+						<code id="mining_info" class="json kljs"></code>
+					</details>
+				</pre>
+			</div>
+		</div>
+								
+				<div class="footer text-center">
+					<a href="#top" class="btn btn-simple btn-primary btn-lg">Haut de page</a>
+				</div>
+			</form>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- Doit rester à la fin du body -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="../custom.js"></script>
+	</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Saisie de données</title>
+		<link rel="icon" type="image/png" href="./asset/image/Logo_ESILV_reduit.png">
+		<!--     Fonts and icons     -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="./asset/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="./asset/css/material.css"/>
+		<script>
+			function dropdown(val) {
+				var y = document.getElementsByClassName('btn btn-select dropdown-toggle');
+				var aNode = y[0].innerHTML = val + ' <span class="caret"></span>'; // Append 
+				
+			}
+		</script>	
+		
+	</head>
+	
+	<body>
+	
+		<!--########################################################
+		#
+		#
+		#					Navigation bar 
+		#
+		#
+		############################################################ -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="https://coupetm.github.io/">
+				<img id="home" alt="Brand" src="./asset/image/home.png" >
+				</a>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="./bitcoin/index.html">TP 1</a></li>
+						<li class="active"><a href="#">TP 2</a></li>
+						<li><a href="#">TP 3</a></li>
+						<li><a href="#">TP 4</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="https://www.creative-tim.com/product/material-kit?ref=presentation-page">A propos</a></li>
+						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
+						<li> 
+							<a class="navbar-brand" href="http://www.esilv.fr/">
+								<img id="logo_esilv" alt="Brand" src="./asset/image/Logo_ESILV.png" >
+							</a> 
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		
+		
+		
+		<div class="card card-signup">
+			<form class="form" method="" action="">
+				<div class="header header-primary text-center">
+					<h4>Saisir des données</h4>
+				</div>
+				<div class="content">
+				
+				
+				
+				
+				
+					<div class="dropdown" style="width:200px;margin-left:auto;margin-right:auto;">
+						<a href="#" class="btn btn-select dropdown-toggle" data-toggle="dropdown" >
+						Choisir le type de données
+							<b class="caret"></b>
+						</a>
+						<ul id="dropdwn" class="dropdown-menu">
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Action	</a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Another action </a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Something else here </a></li>
+							<li class="divider"></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Separated link </a></li>
+							<li class="divider"></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">One more separated link </a></li>
+						</ul>
+					</div>
+					<div class="input-group">
+						
+						<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+										<input type="text" class="form-control" placeholder="First Name...">
+					</div>
+
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">email</i>
+										</span>
+										<input type="text" class="form-control" placeholder="Email...">
+									</div>
+
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+										<input type="password" placeholder="Password..." class="form-control" />
+									</div>
+
+									<!-- If you want to add a checkbox to this form, uncomment this code
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" name="optionsCheckboxes" checked>
+											Subscribe to newsletter
+										</label>
+									</div> -->
+								</div>
+								<div class="footer text-center">
+									<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Get Started</a>
+								</div>
+							</form>
+						</div>
+				
+		
+		
+		
+		
+		
+		
+		<!-- Doit rester à la fin du body -->
+		
+		
+		<!--   Core JS Files   -->
+	<script src="./asset/js/jquery.min.js" type="text/javascript"></script>
+	<script src="./asset/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="./asset/js/material.min.js"></script>
+
+	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="./asset/js/nouislider.min.js" type="text/javascript"></script>
+
+	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+	<script src="./asset/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+	<script src="./asset/js/material-kit.js" type="text/javascript"></script>
+	</body>
+</html>
