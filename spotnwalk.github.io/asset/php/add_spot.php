@@ -1,5 +1,5 @@
 <?php
-	require "connexion.php";
+	
 	$nom_spot = $_POST["nom_spot"];
 	$categorie = $_POST["categorie"];
 	$description = $_POST["description"];
@@ -10,5 +10,5 @@
 	$longitude_min = $_POST["longitude_min"];
 	$longitude_sec = $_POST["longitude_sec"];
 	
-	$conn->close();
+
 ?>
