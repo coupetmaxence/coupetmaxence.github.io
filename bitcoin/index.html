@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Infos WebServices</title>
 		<link rel="icon" type="image/png" href="./asset/image/Logo_ESILV_reduit.png">
 		<link rel="stylesheet" href="./asset/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="./asset/css/material.css"/>
 		
 		<script>
+			
 			function requetteApi(url, elementID)
 			{
 				var xmlhttp = new XMLHttpRequest();
@@ -23,7 +25,7 @@
 			
 			function homePageLoading()
 			{
-				url = "http://bitcoin.mubiz.com/info";
+				url = "https://api.blockcypher.com/v1/btc/main";
 				elementID = "demo";
 				requetteApi(url, elementID);
 				url = "http://bitcoin.mubiz.com/blockchaininfo";
@@ -37,6 +39,8 @@
 				requetteApi(url, elementID);	
 			}
 			homePageLoading();
+	
+
 		</script>
 	</head>
 	
