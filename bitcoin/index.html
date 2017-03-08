@@ -6,42 +6,15 @@
 		<link rel="icon" type="image/png" href="./asset/image/Logo_ESILV_reduit.png">
 		<link rel="stylesheet" href="./asset/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="./asset/css/material.css"/>
-		
-		<script>
-			
-			function requetteApi(url, elementID)
-			{
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var myObj = this.responseText;
-					var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2);
-					document.getElementById(elementID).innerHTML = jsonPretty;
-				}
-			};
-			xmlhttp.open("GET", url, true);
-			xmlhttp.send();
-			}
-			
-			function homePageLoading()
-			{
-				url = "https://api.blockcypher.com/v1/btc/main";
-				elementID = "demo";
-				requetteApi(url, elementID);
-				url = "http://bitcoin.mubiz.com/blockchaininfo";
-				elementID = "blockchain_info";
-				requetteApi(url, elementID);
-				url = "http://bitcoin.mubiz.com/peerinfo";
-				elementID = "peer_info";
-				requetteApi(url, elementID);
-				url = "http://bitcoin.mubiz.com/mininginfo";
-				elementID = "mining_info";
-				requetteApi(url, elementID);	
-			}
-			homePageLoading();
-	
+		<link
+	href="https://blackrockdigital.github.io/startbootstrap-sb-admin/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
-		</script>
+		
+		<script type="text/javascript" src="./asset/js/bitcoin.js" defer></script>
 	</head>
 	
 	<body>
@@ -55,13 +28,13 @@
 		############################################################ -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="https://coupetm.github.io/">
-				<img id="home" alt="Brand" src="./asset/image/home.png" >
+				<a class="navbar-brand" href="https://coupetmaxence.github.io/">
+					<img id="home" alt="Brand" src="./assets/img/home.png" >
 				</a>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="./index.html">TP 1</a></li>
-						<li><a href="#">TP 2</a></li>
+						<li><a href="https://coupetmaxence.github.io/bitcoin/index.html">TP 1</a></li>
+						<li><a href="https://coupetmaxence.github.io/bitcoin/explorer/index.html">TP 2</a></li>
 						<li><a href="#">TP 3</a></li>
 						<li><a href="#">TP 4</a></li>
 						
@@ -71,7 +44,7 @@
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="./asset/image/Logo_ESILV.png" >
+								<img id="logo_esilv" alt="Brand" src="./assets/img/Logo_ESILV.png" >
 							</a> 
 						</li>
 					</ul>
@@ -86,28 +59,86 @@
 					<h4>Données récupérées</h4>
 				</div>
 				
-				<div class="row">
-			<div class="col-lg-12 col-xs-6">
-				<pre>
-					<details>
-						<summary>Informations WebService (Mubiz)</summary>
-						<code id="demo" class="json kljs"></code>
-					</details>
-					<details>
-						<summary>Informations blockchain</summary>
-						<code id="blockchain_info" class="json kljs"></code>
-					</details>
-					<details>
-						<summary>Informations peer</summary>
-						<code id="peer_info" class="json kljs"></code>
-					</details>
-					<details>
-						<summary>Informations mining</summary>
-						<code id="mining_info" class="json kljs"></code>
-					</details>
-				</pre>
+				<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="panel panel-yellow">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-tasks fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<h2>
+										<span id="bitcoin_block_number"></span>
+									</h2>
+									<div>Blocks</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-tasks fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<h2>
+										<span id="bitcoin_network_hash"></span>
+									</h2>
+									<div>Blocks</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="panel panel-red">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-tasks fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<h2>
+										<span id="bitcoin_blocks"></span>
+									</h2>
+									<div>Blocks</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="panel panel-green">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-money fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<h2>
+										<span id="bitcoin_usd_price"></span>
+									</h2>
+									<div> / bitcoin</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	</section>
+	
 								
 				<div class="footer text-center">
 					<a href="#top" class="btn btn-simple btn-primary btn-lg">Haut de page</a>
@@ -124,7 +155,9 @@
 		
 		<!-- Doit rester à la fin du body -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
 		<script src="../custom.js"></script>
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
 	</body>
 </html>

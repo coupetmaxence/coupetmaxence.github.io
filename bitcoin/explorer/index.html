@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf8">
 		<title>Saisie de données</title>
 		<link rel="icon" type="image/png" href="./asset/image/Logo_ESILV_reduit.png">
 		<!--     Fonts and icons     -->
@@ -15,6 +16,11 @@
 				var aNode = y[0].innerHTML = val + ' <span class="caret"></span>'; // Append 
 				
 			}
+			jQuery("#action-1").click(function(e){
+			//do something
+			$('#passwordsNoMatchRegister').show();
+			e.preventDefault();
+});
 		</script>	
 		
 	</head>
@@ -30,13 +36,13 @@
 		############################################################ -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="https://coupetm.github.io/">
-				<img id="home" alt="Brand" src="./asset/image/home.png" >
+				<a class="navbar-brand" href="https://coupetmaxence.github.io/">
+					<img id="home" alt="Brand" src="./assets/img/home.png" >
 				</a>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="./bitcoin/index.html">TP 1</a></li>
-						<li class="active"><a href="#">TP 2</a></li>
+						<li><a href="https://coupetmaxence.github.io/bitcoin/index.html">TP 1</a></li>
+						<li><a href="https://coupetmaxence.github.io/bitcoin/explorer/index.html">TP 2</a></li>
 						<li><a href="#">TP 3</a></li>
 						<li><a href="#">TP 4</a></li>
 						
@@ -46,14 +52,13 @@
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="./asset/image/Logo_ESILV.png" >
+								<img id="logo_esilv" alt="Brand" src="./assets/img/Logo_ESILV.png" >
 							</a> 
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-		
 		
 		
 		
@@ -65,57 +70,49 @@
 				<div class="content">
 				
 				
+				<div class="alert alert-error" id="passwordsNoMatchRegister" visibility="gone">
+  <span>
+    <p>Looks like the passwords you entered don't match!</p>
+  </span>
+</div>
 				
-				
-				
+				<div class=input-group>
 					<div class="dropdown" style="width:200px;margin-left:auto;margin-right:auto;">
 						<a href="#" class="btn btn-select dropdown-toggle" data-toggle="dropdown" >
 						Choisir le type de données
 							<b class="caret"></b>
 						</a>
 						<ul id="dropdwn" class="dropdown-menu">
-							<li><a onclick="dropdown(this.innerHTML);" href="#">Action	</a></li>
-							<li><a onclick="dropdown(this.innerHTML);" href="#">Another action </a></li>
-							<li><a onclick="dropdown(this.innerHTML);" href="#">Something else here </a></li>
-							<li class="divider"></li>
-							<li><a onclick="dropdown(this.innerHTML);" href="#">Separated link </a></li>
-							<li class="divider"></li>
-							<li><a onclick="dropdown(this.innerHTML);" href="#">One more separated link </a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#action-1">Adresse</a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de transaction</a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de block</a></li>
+							<li><a onclick="dropdown(this.innerHTML);" href="#">Index de block</a></li>
 						</ul>
 					</div>
-					<div class="input-group">
+					<p id="text">aaa</p>
+				</div>
+				<div class="dropdown">
+				<select name="select" class="selectpicker">
+  <option value="valeur1">Valeur 1</option> 
+  <option value="valeur2" selected>Valeur 2</option>
+  <option value="valeur3">Valeur 3</option>
+</select>
+</div>
+		
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">language</i>
+							</span>
+							<input type="text" class="form-control" placeholder="Adresse du block">
+						</div>
 						
-						<span class="input-group-addon">
-											<i class="material-icons">face</i>
-										</span>
-										<input type="text" class="form-control" placeholder="First Name...">
-					</div>
+									
 
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="material-icons">email</i>
-										</span>
-										<input type="text" class="form-control" placeholder="Email...">
-									</div>
-
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="material-icons">lock_outline</i>
-										</span>
-										<input type="password" placeholder="Password..." class="form-control" />
-									</div>
-
-									<!-- If you want to add a checkbox to this form, uncomment this code
-
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" name="optionsCheckboxes" checked>
-											Subscribe to newsletter
-										</label>
-									</div> -->
+									
 								</div>
 								<div class="footer text-center">
-									<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Get Started</a>
+									<a href="#pablo" class="btn btn-primary btn-lg">Rechercher</a>
 								</div>
 							</form>
 						</div>
