@@ -14,17 +14,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 		
-		
 		<script>
-		var hash;
-		var json;
-		var myObj;
-		
 		var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				myObj = this.responseText;
-				json = JSON.parse(myObj);
+				var myObj = this.responseText;
+				var json = JSON.parse(myObj);
 				document.getElementById("bitcoin_block_number").innerHTML = json.height;
 				document.getElementById("bitcoin_network_hash").innerHTML = json.hash;
 				document.getElementById("bitcoin_blocks").innerHTML = json.time;
@@ -35,20 +30,25 @@
 		
 		xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main", true);
 		xmlhttp.send();
+		</script>
+		<script>
+		
+		
 		
 		var xmlhttp2 = new XMLHttpRequest();
 			xmlhttp2.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = this.responseText;
 				var json = JSON.parse(myObj);
-				document.getElementById("transaction").innerHTML = json.total;
+				document.getElementById("transaction").innerHTML = json.total/1000;
 			}
 		};
-		hash = document.getElementById("bitcoin_network_hash").innerHTML;
-		alert(hash);
+		var hash = "0000000000000000189bba3564a63772107b5673c940c16f12662b3e8546b412";
+		
 		var url = "https://api.blockcypher.com/v1/btc/main/blocks/"+hash;
 		xmlhttp2.open("GET", url, true);
 		xmlhttp2.send();
+		
 		</script>
 		<script>
 			
@@ -100,6 +100,7 @@
 				
 				<section>
 		<div class="container" id="div_header_info_ws">
+			
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="panel panel-yellow">
@@ -259,9 +260,21 @@
 		
 		<!-- Doit rester à la fin du body -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="./custom.js"></script>
-		<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
+		
+		<!--   Core JS Files   -->
+	<script src="./assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="./assets/js/material.min.js"></script>
+
+	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="./assets/js/nouislider.min.js" type="text/javascript"></script>
+
+	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+	<script src="./assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+	<script src="./assets/js/material-kit.js" type="text/javascript"></script>
 	</body>
 </html>
