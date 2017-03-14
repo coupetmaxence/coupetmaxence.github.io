@@ -16,7 +16,9 @@
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
-		
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js">
+			$('.box').matchHeight();
+		</script>
 		<script>
 		var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
@@ -128,11 +130,13 @@
 						</div>
 						<div class="panel-body">
 							<h4>
-										<span id="bitcoin_block_number"></span>
-									</h4>
+								<span id="bitcoin_block_number"></span>
+							</h4>
 						</div>
 					</div>
 				</div>
+			
+			
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="panel panel-blue">
 						<div class="panel-heading">
@@ -141,19 +145,18 @@
 									<i class="material-icons" style="font-size:50px;">code</i>
 								</div>
 								<div class="col-xs-9 text-right">
-									
 									<h5>Hash du dernier block confirmé</h5>
 								</div>
 							</div>
 						</div>
 						<div class="panel-body">
-						<h4>
-										<span id="bitcoin_network_hash"></span>
-										
-									</h4>
+							<h4>
+								<span id="bitcoin_network_hash"></span>
+							</h4>
 						</div>
 					</div>
 				</div>
+			
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="panel panel-red">
 						<div class="panel-heading">
@@ -234,7 +237,8 @@
 									</h4>
 						</div>
 					</div>
-				</div>
+				
+			</div>
 			
 		</div>
 		<p id="demo"></p>

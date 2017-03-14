@@ -2450,7 +2450,60 @@ h2.title {
   border-radius: 2px;
   border: 0;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-word-wrap:break-word;  }
+word-wrap:break-word;
+
+ }
+ .panel.panel-blue {
+	 background-color: #448aff;
+ }
+ .panel.panel-yellow {
+	background-color: #ffeb3b;
+ }
+ .panel.panel-brown {
+	background-color: #a1887f;
+ }
+ .panel.panel-green {
+	background-color: #66bb6a;
+ }
+ .panel.panel-red {
+	background-color: #ef5350;
+ }
+ .panel.panel-purple {
+	background-color: #ba68c8;
+ }
+ @media screen and (min-width: 480px) {
+    .panel.panel-blue {
+	 background-color: #448aff;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+ .panel.panel-yellow {
+	background-color: #ffeb3b;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+ .panel.panel-brown {
+	background-color: #a1887f;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+ .panel.panel-green {
+	background-color: #66bb6a;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+ .panel.panel-red {
+	background-color: #ef5350;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+ .panel.panel-purple {
+	background-color: #ba68c8;
+	height: 15.8em;
+    overflow-y: auto; 
+ }
+}
+ 
   .panel > .panel-heading, .panel.panel-default > .panel-heading {
     background-color: #eeeeee; }
   .panel.panel-inverse > .panel-heading {
@@ -3080,3 +3133,4 @@ padding-top : 100px;
 #div_header_info_ws{
 	padding-top : 30px;
 }
+
