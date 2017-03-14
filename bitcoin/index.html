@@ -45,7 +45,7 @@
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = this.responseText;
 				var json = JSON.parse(myObj);
-				document.getElementById("transaction").innerHTML = json.total/1000;
+				document.getElementById("transaction").innerHTML = json.total/100000000;
 			}
 		};
 		var hash = "0000000000000000189bba3564a63772107b5673c940c16f12662b3e8546b412";
@@ -203,7 +203,7 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">attach_money</i>
+									<i class="material-icons" style="font-size:50px;">people</i>
 								</div>
 								<div class="col-xs-9 text-right">
 									
@@ -227,7 +227,7 @@
 								</div>
 								<div class="col-xs-9 text-right">
 									
-									<h5>Montant de la dernière transaction (en satoshis)</h5>
+									<h5>Montant de la dernière transaction (en bitcoin)</h5>
 								</div>
 							</div>
 						</div>
