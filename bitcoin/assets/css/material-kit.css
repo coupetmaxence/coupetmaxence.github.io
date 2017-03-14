@@ -2449,13 +2449,57 @@ h2.title {
 .panel {
   border-radius: 2px;
   border: 0;
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12); }
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+word-wrap:break-word;  }
   .panel > .panel-heading, .panel.panel-default > .panel-heading {
     background-color: #eeeeee; }
   .panel.panel-inverse > .panel-heading {
     background-color: #3f51b5; }
+  .panel.panel-yellow > .panel-heading {
+    background-color: #ffeb3b;
+	color: #e65100;	}
+  .panel.panel-yellow > .panel-body {
+    background-color: #ffeb3b;
+	color: #e65100;
+	height: calc(15vh);}
+  .panel.panel-blue > .panel-heading {
+    background-color: #448aff;
+	color: #1a237e;	}
+  .panel.panel-blue > .panel-body {
+    background-color: #448aff;
+	color: #1a237e;
+	height: calc(15vh);}
+  .panel.panel-green > .panel-heading {
+    background-color: #66bb6a;
+	color: #1b5e20;	}
+  .panel.panel-green > .panel-body {
+    background-color: #66bb6a;
+	color: #1b5e20;
+	height: calc(17.6vh);}
+  .panel.panel-red > .panel-heading {
+    background-color: #ef5350;
+	color: #930000;	}
+  .panel.panel-red > .panel-body {
+    background-color: #ef5350;
+	color: #930000;
+	height: calc(15vh);}
+	.panel.panel-brown > .panel-heading {
+    background-color: #a1887f;
+	color: #3e2723;	}
+  .panel.panel-brown > .panel-body {
+    background-color: #a1887f;
+	color: #3e2723;
+	height: calc(15vh);}
+	.panel.panel-purple > .panel-heading {
+    background-color: #ba68c8;
+	color: #64008c;	}
+  .panel.panel-purple > .panel-body {
+    background-color: #ba68c8;
+	color: #64008c;
+	height: calc(15vh);}
+	
   .panel.panel-primary > .panel-heading {
-    background-color: #2196f3; }
+    background-color: #2196f3;}
   .panel.panel-success > .panel-heading {
     background-color: #4caf50; }
   .panel.panel-info > .panel-heading {
@@ -2464,7 +2508,7 @@ h2.title {
     background-color: #fbc02d; }
   .panel.panel-danger > .panel-heading {
     background-color: #f44336; }
-
+	
 [class*="panel-"] > .panel-heading {
   color: #ffffff;
   border: 0; }
@@ -3038,4 +3082,7 @@ body { padding-top: 140px; }
 
 #div_profil{
 padding-top : 100px;
+}
+#div_header_info_ws{
+	padding-top : 30px;
 }
