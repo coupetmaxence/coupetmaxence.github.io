@@ -35,10 +35,10 @@
 		
 		xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main", true);
 		xmlhttp.send();
-		</script>
-		<script>
 		
 		
+		var hash = document.getElementById("bitcoin_network_hash").textContent;
+		alert(hash);
 		
 		var xmlhttp2 = new XMLHttpRequest();
 			xmlhttp2.onreadystatechange = function() {
@@ -48,7 +48,7 @@
 				document.getElementById("transaction").innerHTML = json.total/100000000;
 			}
 		};
-		var hash = "0000000000000000189bba3564a63772107b5673c940c16f12662b3e8546b412";
+		
 		
 		var url = "https://api.blockcypher.com/v1/btc/main/blocks/"+hash;
 		xmlhttp2.open("GET", url, true);
@@ -92,7 +92,6 @@
 						
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://www.creative-tim.com/product/material-kit?ref=presentation-page">A propos</a></li>
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
@@ -117,7 +116,7 @@
 						<li class="active">
 							<a href="#studio" role="tab" data-toggle="tab">
 								<i class="material-icons">info</i>
-								Informations du WebServices
+								Informations du WebService
 							</a>
 						</li>
 						<li>
@@ -248,25 +247,14 @@
 							</div> 
 						</div>
 						<div class="tab-pane text-center" id="work">
-							<div class=input-group>
-								<div class="dropdown" style="width:200px;margin-left:auto;margin-right:auto;">
-									<a href="#" class="btn btn-select dropdown-toggle" data-toggle="dropdown" >
-										Choisir le type de données
-										<b class="caret"></b>
-									</a>
-									<ul id="dropdwn" class="dropdown-menu">
-										<li><a onclick="dropdown(this.innerHTML);" href="#action-1">Adresse</a></li>
-										<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de transaction</a></li>
-										<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de block</a></li>
-										<li><a onclick="dropdown(this.innerHTML);" href="#">Index de block</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="dropdown">
-								<select name="select" class="selectpicker">
-									<option value="valeur1">Valeur 1</option> 
-									<option value="valeur2" selected>Valeur 2</option>
-									<option value="valeur3">Valeur 3</option>
+						<div class="form">
+							<div class="input-group" style="margin:auto">
+								<label for="sel1">Choisir le mode de recherche :</label>
+								<select class="form-control" id="sel1">
+									<option>Adresse</option>
+									<option>Hash de transaction</option>
+									<option>Hash de bloc</option>
+									<option>Index de bloc</option>
 								</select>
 							</div>
 							<div class="input-group">
@@ -276,8 +264,9 @@
 								<input type="text" class="form-control" placeholder="Adresse du block">
 							</div>
 							<div class="footer text-center">
-								<a href="#pablo" class="btn btn-primary btn-lg">Rechercher</a>
+								<a href="#pablo" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Rechercher</a>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -299,7 +288,28 @@
 				</nav>
 			</div>
 		</footer> 	
-
+		
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-simple">Nice Button</button>
+				<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 		<!-- Doit rester à la fin du body -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
