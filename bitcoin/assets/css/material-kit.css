@@ -2388,7 +2388,9 @@ h2.title {
 .card-nav-tabs {
   margin-top: 45px; }
   .card-nav-tabs .header {
-    margin-top: -30px; }
+    margin-top: -30px;
+	margin-left: 25em;
+	margin-right:25em;}
   .card-nav-tabs .nav-tabs {
     background: transparent; }
 

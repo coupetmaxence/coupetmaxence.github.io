@@ -85,13 +85,12 @@
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
+						<li  class="active"><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Accéléromètre</a></li>
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">Projet Spot&amp;Walk</a></li>
 						
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://www.creative-tim.com/product/material-kit?ref=presentation-page">A propos</a></li>
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
@@ -103,33 +102,32 @@
 			</div>
 		</nav>
 		
-		
-		<div class="card card-signup" id="top">
-			<!-- Titre de la page dans une card -->
-			<div class="header header-primary text-center">
-				<h4>TP Bitcoin</h4>
-			</div>
-		
-			<div class="container" id="div_header_info_ws">
-				<div class="nav-align-center">
-					<ul class="nav nav-pills" role="tablist" id="nav_pill">
-						<li class="active">
-							<a href="#studio" role="tab" data-toggle="tab">
-								<i class="material-icons">info</i>
-								Informations du WebServices
-							</a>
-						</li>
-						<li>
-							<a href="#work" role="tab" data-toggle="tab">
-								<i class="material-icons">search</i>
-								Recherche d'informations
-							</a>
-						</li>
-					</ul>
-	
-					<div class="tab-content gallery">
-						<div class="tab-pane active" id="studio">  
-							<div class="div_content_ws">
+		<div class="card card-nav-tabs">
+							<div class="header header-primary">
+								<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+								<div class="nav-tabs-navigation">
+									<div class="nav-tabs-wrapper">
+										<ul class="nav nav-tabs text-center" data-tabs="tabs">
+											<li class="active">
+												<a href="#info_ws" data-toggle="tab">
+													<i class="material-icons">info</i>
+													WebService
+												</a>
+											</li>
+											<li>
+												<a href="#rechercher" data-toggle="tab">
+													<i class="material-icons">search</i>
+													Rechercher
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="content">
+								<div class="tab-content text-center">
+									<div class="tab-pane active" id="info_ws">
+										<div class="div_content_ws">
 								<div class="col-lg-4 col-md-6 col-sm-12">
 									<div class="panel panel-yellow">
 										<div class="panel-heading">
@@ -246,7 +244,7 @@
 								</div>
 							</div> 
 						</div>
-						<div class="tab-pane text-center" id="work">
+						<div class="tab-pane text-center" id="rechercher">
 							<div class=input-group>
 								<div class="dropdown" style="width:200px;margin-left:auto;margin-right:auto;">
 									<a href="#" class="btn btn-select dropdown-toggle" data-toggle="dropdown" >
@@ -280,8 +278,13 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+		
+		
 		<footer class="footer">
 			<div class="container">
 				<nav class="pull-right">
