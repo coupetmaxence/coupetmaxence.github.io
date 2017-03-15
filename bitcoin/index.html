@@ -61,7 +61,6 @@
 	</head>
 	
 	<body>
-	
 		<!--########################################################
 		#
 		#
@@ -71,7 +70,7 @@
 		############################################################ -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
+				<!-- Groupe pour l'affichage sur mobile -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
@@ -83,13 +82,11 @@
 						<img id="home" alt="Brand" src="./assets/img/home.png" >
 					</a>
 				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
-						<li><a href="https://coupetmaxence.github.io/bitcoin/explorer/index.html">TP Accéléromètre</a></li>
+						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Accéléromètre</a></li>
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">Projet Spot&amp;Walk</a></li>
 						
 					</ul>
@@ -103,239 +100,222 @@
 						</li>
 					</ul>
 				</div>
-  </div><!-- /.container-fluid -->
-</nav>
+			</div>
+		</nav>
 		
 		
 		<div class="card card-signup" id="top">
+			<!-- Titre de la page dans une card -->
 			<div class="header header-primary text-center">
-					<h4>TP Bitcoin</h4>
-				</div>
-				
-		<section>
-		<div class="container" id="div_header_info_ws">
+				<h4>TP Bitcoin</h4>
+			</div>
 		
-					                    <div class="nav-align-center" >
-									<ul class="nav nav-pills" role="tablist" id="nav_pill">
-										<li class="active">
-											<a href="#studio" role="tab" data-toggle="tab">
-												<i class="material-icons">info</i>
-												Informations tirées du WebServices
-											</a>
-										</li>
-										<li>
-				                            <a href="#work" role="tab" data-toggle="tab">
-												<i class="material-icons">search</i>
-												Recherche d'informations
-				                            </a>
-				                        </li>
-				                    </ul>
-
-				                    <div class="tab-content gallery">
-										<div class="tab-pane active" id="studio">
-				                           
-										   
-										   
-										   
-										   
-										   
-										   <div class="div_content_ws">
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-yellow">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">view_module</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<h5>Nombre de blocks</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-								<span id="bitcoin_block_number"></span>
-							</h4>
-						</div>
-					</div>
-				</div>
-			
-			
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-blue">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">code</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<h5>Hash du dernier block confirmé</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-								<span id="bitcoin_network_hash"></span>
-							</h4>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-red">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">date_range</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									
-									<h5>Date d'ajout du dernier block</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-										<span id="bitcoin_blocks"></span>
-									</h4>
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-brown">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">attach_money</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									
-									<h5>Frais/kb moyen (en satoshi) pour confirmer une transaction</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-										<span id="medium_fees"></span>
-									</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-green">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">people</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									
-									<h5>Nombre de peers</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-										<span id="peer_count"></span>
-									</h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="panel panel-purple">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="material-icons" style="font-size:50px;">attach_money</i>
-								</div>
-								<div class="col-xs-9 text-right">
-									
-									<h5>Montant de la dernière transaction (en bitcoin)</h5>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<h4>
-										<span id="transaction"></span>
-									</h4>
-						</div>
-					</div>
-				
-			</div>
-			</div>
-										   
-										   
-										   
-										   
-										   
-										   
-										   
-				                        </div>
-				                        <div class="tab-pane text-center" id="work">
-											<div class="row">
-												
-											</div>
-				                        </div>
-										<div class="tab-pane text-center" id="shows">
-											<div class="row">
-												
-											</div>
-				                        </div>
-
-				                    </div>
-								</div>
-			
-		</div>
-		<p id="demo"></p>
-		<p id="bit" visibility="gone"></p>
-	</section>		
-				
+			<div class="container" id="div_header_info_ws">
+				<div class="nav-align-center">
+					<ul class="nav nav-pills" role="tablist" id="nav_pill">
+						<li class="active">
+							<a href="#studio" role="tab" data-toggle="tab">
+								<i class="material-icons">info</i>
+								Informations du WebServices
+							</a>
+						</li>
+						<li>
+							<a href="#work" role="tab" data-toggle="tab">
+								<i class="material-icons">search</i>
+								Recherche d'informations
+							</a>
+						</li>
+					</ul>
 	
-				
-			
+					<div class="tab-content gallery">
+						<div class="tab-pane active" id="studio">  
+							<div class="div_content_ws">
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-yellow">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">view_module</i>
+												</div>
+												<div class="col-xs-9 text-right">
+													<h5>Nombre de blocks</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="bitcoin_block_number"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-blue">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">code</i>
+												</div>
+												<div class="col-xs-9 text-right">
+													<h5>Hash du dernier block confirmé</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="bitcoin_network_hash"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-red">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">date_range</i>
+												</div>
+												<div class="col-xs-9 text-right">	
+													<h5>Date d'ajout du dernier block</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="bitcoin_blocks"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-brown">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">attach_money</i>
+												</div>
+												<div class="col-xs-9 text-right">
+													<h5>Frais/kb moyen (en satoshi) pour confirmer une transaction</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="medium_fees"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-green">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">people</i>
+												</div>
+												<div class="col-xs-9 text-right">
+													<h5>Nombre de peers</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="peer_count"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="panel panel-purple">
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-xs-3">
+													<i class="material-icons" style="font-size:50px;">attach_money</i>
+												</div>
+												<div class="col-xs-9 text-right">
+													<h5>Montant de la dernière transaction (en bitcoin)</h5>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<h4>
+												<span id="transaction"></span>
+											</h4>
+										</div>
+									</div>
+								</div>
+							</div> 
+						</div>
+						<div class="tab-pane text-center" id="work">
+							<div class=input-group>
+								<div class="dropdown" style="width:200px;margin-left:auto;margin-right:auto;">
+									<a href="#" class="btn btn-select dropdown-toggle" data-toggle="dropdown" >
+										Choisir le type de données
+										<b class="caret"></b>
+									</a>
+									<ul id="dropdwn" class="dropdown-menu">
+										<li><a onclick="dropdown(this.innerHTML);" href="#action-1">Adresse</a></li>
+										<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de transaction</a></li>
+										<li><a onclick="dropdown(this.innerHTML);" href="#">Hash de block</a></li>
+										<li><a onclick="dropdown(this.innerHTML);" href="#">Index de block</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="dropdown">
+								<select name="select" class="selectpicker">
+									<option value="valeur1">Valeur 1</option> 
+									<option value="valeur2" selected>Valeur 2</option>
+									<option value="valeur3">Valeur 3</option>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">language</i>
+								</span>
+								<input type="text" class="form-control" placeholder="Adresse du block">
+							</div>
+							<div class="footer text-center">
+								<a href="#pablo" class="btn btn-primary btn-lg">Rechercher</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		 <footer class="footer">
-        <div class="container">
-            <nav class="pull-right">
-				<ul>
-					<li>
-						Retrouvez mon profil sur LinkedIn
-					</li>
-					<li>
-						<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-							<img id="home" alt="Brand" src="./assets/img/logo_linkedin.png" >
-						</a>
-					</li>
-				</ul>
-            </nav>
-        </div>
-    </footer> 	
-		
-		
-		
-		
-		
-		
-		
-		
+		<footer class="footer">
+			<div class="container">
+				<nav class="pull-right">
+					<ul>
+						<li>
+							Retrouvez mon profil sur LinkedIn
+						</li>
+						<li>
+							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
+								<img id="home" alt="Brand" src="./assets/img/logo_linkedin.png" >
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</footer> 	
+
 		<!-- Doit rester à la fin du body -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="./custom.js"></script>
 		
 		<!--   Core JS Files   -->
-	<script src="./assets/js/jquery.min.js" type="text/javascript"></script>
-	<script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="./assets/js/material.min.js"></script>
+		<script src="./assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="./assets/js/material.min.js"></script>
 
-	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script src="./assets/js/nouislider.min.js" type="text/javascript"></script>
+		<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+		<script src="./assets/js/nouislider.min.js" type="text/javascript"></script>
 
-	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-	<script src="./assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+		<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+		<script src="./assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
-	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-	<script src="./assets/js/material-kit.js" type="text/javascript"></script>
+		<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+		<script src="./assets/js/material-kit.js" type="text/javascript"></script>
 	</body>
 </html>
