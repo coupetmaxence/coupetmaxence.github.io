@@ -54,9 +54,43 @@
 		xmlhttp2.open("GET", url, true);
 		xmlhttp2.send();
 		
-		</script>
-		<script>
-			
+		function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+		
+		function recherche()
+			{
+				document.getElementById("paragraphe").innerHTML = document.getElementById("adresse").value;
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() 
+				{
+					if (this.readyState == 4 && this.status == 200) 
+					{
+						var myObj = this.responseText;
+						var json = JSON.stringify(JSON.parse(myObj),undefined,4);
+						
+						document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
+					}
+				};
+				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+document.getElementById("adresse").value, true);
+				xmlhttp.send();
+			}
+		
 		</script>
 		
 	</head>
@@ -65,7 +99,9 @@
 		<!--########################################################
 		#
 		#
+		#
 		#					Navigation bar 
+		#
 		#
 		#
 		############################################################ -->
@@ -87,9 +123,8 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
-						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Accéléromètre</a></li>
-						<li><a href="https://coupetmaxence.github.io/bitcoin/">Projet Spot&amp;Walk</a></li>
-						
+						<li><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a></li>
+						<li><a href="https://coupetmaxence.github.io/spotnwalk/">Projet Spot&amp;Walk</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
@@ -104,31 +139,57 @@
 		</nav>
 		
 		
+		
+		
+		
+		
+		<!--########################################################
+		#
+		#
+		#
+		#					Page principale 
+		#
+		#
+		#
+		############################################################ -->
 		<div class="card card-signup" id="top">
 			<!-- Titre de la page dans une card -->
 			<div class="header header-primary text-center">
 				<h4>TP Bitcoin</h4>
 			</div>
-		
+			<!-- Conteneur principal -->
 			<div class="container" id="div_header_info_ws">
 				<div class="nav-align-center">
+					<!-- Titres des sections -->
 					<ul class="nav nav-pills" role="tablist" id="nav_pill">
 						<li class="active">
-							<a href="#studio" role="tab" data-toggle="tab">
+							<a href="#information" role="tab" data-toggle="tab">
 								<i class="material-icons">info</i>
 								Informations du WebService
 							</a>
 						</li>
 						<li>
-							<a href="#work" role="tab" data-toggle="tab">
+							<a href="#rechercher" role="tab" data-toggle="tab">
 								<i class="material-icons">search</i>
 								Recherche d'informations
 							</a>
 						</li>
 					</ul>
-	
+					<!-- Contenu des différentes sections -->
 					<div class="tab-content gallery">
-						<div class="tab-pane active" id="studio">  
+					
+					
+					
+						<!--########################################################
+						#
+						#
+						#
+						#		Section affichant les données du Webservice 
+						#
+						#
+						#
+						############################################################ -->
+						<div class="tab-pane active" id="information">  
 							<div class="div_content_ws">
 								<div class="col-lg-4 col-md-6 col-sm-12">
 									<div class="panel panel-yellow">
@@ -246,7 +307,17 @@
 								</div>
 							</div> 
 						</div>
-						<div class="tab-pane text-center" id="work">
+						
+						<!--########################################################
+						#
+						#
+						#
+						#		Section affichant la page de recherche 
+						#
+						#
+						#
+						############################################################ -->
+						<div class="tab-pane text-center" id="rechercher">
 						<div class="form">
 							<div class="input-group" style="margin:auto">
 								<label for="sel1">Choisir le mode de recherche :</label>
@@ -261,10 +332,11 @@
 								<span class="input-group-addon">
 									<i class="material-icons">language</i>
 								</span>
-								<input type="text" class="form-control" placeholder="Adresse du block">
+								<input type="text" id="adresse" class="form-control" placeholder="Adresse du block">
 							</div>
 							<div class="footer text-center">
-								<a href="#pablo" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Rechercher</a>
+								<button id="bouton_search" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="recherche()">Rechercher</button>
+								<!--<a onclick="recherche" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Rechercher</a>-->
 							</div>
 						</div>
 						</div>
@@ -297,15 +369,11 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					<i class="material-icons">clear</i>
 				</button>
-				<h4 class="modal-title">Modal title</h4>
+				<h4 class="modal-title">Résultat de la recherche</h4>
 			</div>
 			<div class="modal-body">
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default btn-simple">Nice Button</button>
-				<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+				<pre id="paragraphe">
+				</pre>
 			</div>
 		</div>
 	</div>
