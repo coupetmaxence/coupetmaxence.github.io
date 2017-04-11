@@ -14,11 +14,14 @@
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 		
-		<!-- Pour la compatibilité avec les mobiles -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-
 		
+		<!-- Pour la compatibilité avec les mobiles -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"  />
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="./assets/js/qrcode.js">
+
+		</script>
 		<script>
 		var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
@@ -54,6 +57,17 @@
 		xmlhttp2.open("GET", url, true);
 		xmlhttp2.send();
 		
+		function selectChange()
+		{
+			
+			var selects = document.getElementById("mode_saisie");
+			
+			document.getElementById("adresse").placeholder = selects.options[selects.selectedIndex].text;
+			//alert(selects.options[selects.selectedIndex].value);// will gives u 2
+			//var selectedText = selects.options[selects.selectedIndex].text;// gives u value2
+		}
+		
+		
 		function syntaxHighlight(json) {
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
@@ -68,14 +82,23 @@
             cls = 'boolean';
         } else if (/null/.test(match)) {
             cls = 'null';
+        } else if (/null/.test(match)) {
+            cls = 'null';
         }
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
 		
+
+		
+		
+		
+		
+		
+		
 		function recherche()
 			{
-				document.getElementById("paragraphe").innerHTML = document.getElementById("adresse").value;
+				
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() 
 				{
@@ -85,13 +108,80 @@
 						var json = JSON.stringify(JSON.parse(myObj),undefined,4);
 						
 						document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
+						$('#myModal').modal('show');
+					}
+					else
+					{
+						document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
+						$('#myModal').modal('show');
 					}
 				};
-				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+document.getElementById("adresse").value, true);
-				xmlhttp.send();
+				var selects = document.getElementById("mode_saisie");
+				var valeur = selects.options[selects.selectedIndex].value;
+				var data = document.getElementById("adresse").value;
+				
+				if(valeur == "adresse")
+				{
+					var isadress = /^[0-9a-zA-Z]{34}$/.test(data);
+					if(isadress)
+					{
+						//output(syntaxHighlight(data));
+						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+data+"/balance", true);
+						xmlhttp.send();
+					}
+					else
+					{
+						document.getElementById("paragraphe").innerHTML = "Adresse invalide.";
+						$('#myModal').modal('show');
+					}
+				}
+				else if(valeur == "hash_tx")
+				{
+					var ishash = /^[0-9a-fA-F]{64}$/.test(data);
+					if(ishash)
+					{
+						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/txs/"+data, true);
+						xmlhttp.send();
+					}
+					else
+					{
+						document.getElementById("paragraphe").innerHTML = "Hash de transaction invalide.";
+						$('#myModal').modal('show');
+					}
+					
+				}
+				else if(valeur == "hash_b")
+				{
+					var ishash = /^[0-9a-fA-F]{64}$/.test(data);
+					if(ishash)
+					{
+						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+data, true);
+						xmlhttp.send();
+					}
+					else
+					{
+						document.getElementById("paragraphe").innerHTML = "Hash de block invalide.";
+						$('#myModal').modal('show');
+					}
+				}
+				else if(valeur == "index")
+				{
+					if(data == parseInt(data))
+					{
+						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+document.getElementById("adresse").value+"?txstart=1&limit=1", true);
+						xmlhttp.send();
+					}
+					else
+					{
+						document.getElementById("paragraphe").innerHTML = "Index de block invalide.";
+						$('#myModal').modal('show');
+					}
+				}
+				
 			}
 		
 		</script>
+		
 		
 	</head>
 	
@@ -321,24 +411,25 @@
 						<div class="form">
 							<div class="input-group" style="margin:auto">
 								<label for="sel1">Choisir le mode de recherche :</label>
-								<select class="form-control" id="sel1">
-									<option>Adresse</option>
-									<option>Hash de transaction</option>
-									<option>Hash de bloc</option>
-									<option>Index de bloc</option>
+								<select class="form-control" id="mode_saisie" onchange="selectChange()">
+									<option value="adresse">Adresse</option>
+									<option value="hash_tx">Hash de transaction</option>
+									<option value="hash_b">Hash de bloc</option>
+									<option value="index">Index de bloc</option>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">language</i>
 								</span>
-								<input type="text" id="adresse" class="form-control" placeholder="Adresse du block">
+								<input type="text" id="adresse" class="form-control" placeholder="Adresse">
 							</div>
 							<div class="footer text-center">
-								<button id="bouton_search" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="recherche()">Rechercher</button>
-								<!--<a onclick="recherche" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Rechercher</a>-->
+								<button id="bouton_search" class="btn btn-primary" onclick="recherche()">Rechercher</button>
 							</div>
-						</div>
+							<div id="qrcode"></div>
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -363,7 +454,7 @@
 		
 		
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="overflow-y: auto; max-height:70%;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
