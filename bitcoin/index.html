@@ -69,25 +69,32 @@
 		
 		
 		function syntaxHighlight(json) {
-    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        var cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
-        } else if (/null/.test(match)) {
-            cls = 'null';
-        }
-        return '<span class="' + cls + '">' + match + '</span>';
-    });
-}
+			json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+			var cls = 'number';
+			if (/^"/.test(match)) {
+				if (/:$/.test(match)) {
+					cls = 'key';
+				} else {
+					match = match.replace(/['"]+/g, '')
+					if(/^[0-9a-zA-Z]{34}$/.test(match))
+					{
+						
+						cls = 'adresse';
+					}else{
+						
+						cls = 'string';
+					}
+					
+				}
+				} else if (/true|false/.test(match)) {
+					cls = 'boolean';
+				} else if (/null/.test(match)) {
+					cls = 'null';
+				} 
+				return '<span class="' + cls + '">' + match + '</span>';
+			});
+		}
 		
 
 		
@@ -102,19 +109,23 @@
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() 
 				{
-					if (this.readyState == 4 && this.status == 200) 
+					if (this.readyState == 4) 
 					{
-						var myObj = this.responseText;
-						var json = JSON.stringify(JSON.parse(myObj),undefined,4);
-						
-						document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
-						$('#myModal').modal('show');
+						if(this.status == 200)
+						{
+							var myObj = this.responseText;
+							var json = JSON.stringify(JSON.parse(myObj),undefined,4);
+							
+							document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
+							$('#myModal').modal('show');
+						}
+						else
+						{
+							document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
+							$('#myModal').modal('show');
+						}
 					}
-					else
-					{
-						document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
-						$('#myModal').modal('show');
-					}
+					
 				};
 				var selects = document.getElementById("mode_saisie");
 				var valeur = selects.options[selects.selectedIndex].value;
@@ -444,7 +455,7 @@
 						</li>
 						<li>
 							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-								<img id="home" alt="Brand" src="./assets/img/logo_linkedin.png" >
+								<img alt="LinkedIn" src="./assets/img/logo_linkedin.png" >
 							</a>
 						</li>
 					</ul>
@@ -453,7 +464,7 @@
 		</footer> 	
 		
 		
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" style="overflow-y: auto; max-height:70%;">
 		<div class="modal-content">
 			<div class="modal-header">
