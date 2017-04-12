@@ -145,8 +145,20 @@
 					}
 					
 				};
-			xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+var1, true);
-						xmlhttp.send();
+			if(var2 == "adresse")
+			{
+				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+var1, true);
+				xmlhttp.send();
+			} else if(var2 == "hash_b")
+			{
+				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+var1, true);
+				xmlhttp.send();
+			} else if(var2 == "hash_tx")
+			{
+				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/txs/"+var1, true);
+				xmlhttp.send();
+			}
+			
 		}
 		
 		
