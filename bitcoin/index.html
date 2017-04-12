@@ -16,8 +16,9 @@
 		
 		
 		<!-- Pour la compatibilité avec les mobiles -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"  />
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="theme-color" content="#2196f3" />
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 		<script type="text/javascript" src="jquery.min.js"></script>
 		<script type="text/javascript" src="./assets/js/qrcode.js">
 
@@ -68,6 +69,7 @@
 		}
 		
 		
+		
 		function syntaxHighlight(json) {
 			json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 			return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
@@ -79,9 +81,29 @@
 					match = match.replace(/['"]+/g, '')
 					if(/^[0-9a-zA-Z]{34}$/.test(match))
 					{
-						
+						match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"adresse"+'\')">'+match+'</a>';
 						cls = 'adresse';
-					}else{
+					} else if(/^[0-9a-fA-F]{64}$/.test(match))
+					{
+						var bool = true;
+						for(var i=0; i<5; i++)
+						{
+							if(match[i] != "0")
+							{
+								bool = false;
+							}
+						}
+						if(bool)
+						{
+							match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"hash_b"+'\')">'+match+'</a>';
+							cls = 'adresse';
+						}
+						else
+						{
+							match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"hash_tx"+'\')">'+match+'</a>';
+							cls = 'adresse';
+						}
+					} else{
 						
 						cls = 'string';
 					}
@@ -98,7 +120,34 @@
 		
 
 		
+		function MiseAJourModal(var1, var2)
+		{
 		
+			var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() 
+				{
+					//$('#myModal').modal('hide');
+					if (this.readyState == 4) 
+					{
+						if(this.status == 200)
+						{
+							var myObj = this.responseText;
+							var json = JSON.stringify(JSON.parse(myObj),undefined,4);
+							
+							document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
+							$('#myModal').modal('show');
+						}
+						else
+						{
+							document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
+							$('#myModal').modal('show');
+						}
+					}
+					
+				};
+			xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+var1, true);
+						xmlhttp.send();
+		}
 		
 		
 		
@@ -455,7 +504,7 @@
 						</li>
 						<li>
 							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-								<img alt="LinkedIn" src="./assets/img/logo_linkedin.png" >
+								<img alt="LinkedIn" class="logo" src="./assets/img/logo_linkedin.png" >
 							</a>
 						</li>
 					</ul>
@@ -465,7 +514,7 @@
 		
 		
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" style="overflow-y: auto; max-height:70%;">
+			<div class="modal-dialog" style="overflow-y: auto; max-height:75%;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">

@@ -3124,6 +3124,13 @@ h2.title {
     line-height: 20px;
     color: inherit;
     padding: 0px 5px 15px 5px; }
+
+.logo {
+	position: relative;
+    height: 50px;
+    line-height: 20px;
+    color: inherit;
+    padding: 0px 5px 15px 5px; }
 	
 body { padding-top: 140px; }
 
@@ -3144,5 +3151,4 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .boolean { color: blue; }
 .null { color: magenta; }
 .key { color: red; }
-.adresse { color: blue;}
 
