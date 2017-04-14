@@ -142,25 +142,41 @@
 	<body>
 	
 	
-	<nav class="navbar navbar-default navbar-fixed-top">
+		<!--########################################################
+		#
+		#
+		#
+		#					Navigation bar 
+		#
+		#
+		#
+		############################################################ -->
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="https://coupetm.github.io/">
-					<img id="home" alt="Brand" src="./asset/image/home.png" >
-				</a>
+				<!-- Groupe pour l'affichage sur mobile -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="https://coupetmaxence.github.io/">
+						<img id="home" alt="Brand" src="./assets/img/home.png" >
+					</a>
+				</div>
+				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="./bitcoin/index.html">TP 1</a></li>
-						<li><a href="./bitcoin/explorer/index.html">TP 2</a></li>
-						<li><a href="#">TP 3</a></li>
-						<li><a href="#">TP 4</a></li>
-						
+						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
+						<li><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a></li>
+						<li><a href="https://coupetmaxence.github.io/spotnwalk/">Projet Spot&amp;Walk</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://www.creative-tim.com/product/material-kit?ref=presentation-page">A propos</a></li>
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="./asset/image/Logo_ESILV.png" >
+								<img id="logo_esilv" alt="Brand" src="./assets/img/Logo_ESILV.png" >
 							</a> 
 						</li>
 					</ul>
@@ -169,11 +185,10 @@
 		</nav>
 		
 		
-		
 		<div class="card card-signup" id="top">
 			<form class="form" method="" action="">
 				<div class="header header-primary text-center">
-					<h4>Données de l'accéléromètre</h4>
+					<h4>TP accéléromètre</h4>
 				</div>
 				
 				<section>
@@ -253,9 +268,22 @@
 				</div>
 			</form>
 		</div>	
-		<div id="footer_texte" class="footer text-center">
-					<p>TP éléctif IBO ESILV promo 2019</p>
-				</div>
+		<footer class="footer">
+			<div class="container">
+				<nav class="pull-right">
+					<ul>
+						<li>
+							Retrouvez mon profil sur LinkedIn
+						</li>
+						<li>
+							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
+								<img alt="LinkedIn" class="logo" src="./assets/img/logo_linkedin.png" >
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</footer> 
 		
 	</body>
 	
@@ -267,28 +295,9 @@
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="assets/js/material.min.js"></script>
 
-	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script src="assets/js/nouislider.min.js" type="text/javascript"></script>
-
-	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-	<script src="assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 	<script src="assets/js/material-kit.js" type="text/javascript"></script>
 
-    <script>
-        var header_height;
-        var fixed_section;
-        var floating = false;
-
-        $().ready(function(){
-            suggestions_distance = $("#suggestions").offset();
-            pay_height = $('.fixed-section').outerHeight();
-
-			$(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
-
-			// the body of this function is in assets/material-kit.js
-			materialKit.initSliders();
-        });
-    </script>
+    
 </html>

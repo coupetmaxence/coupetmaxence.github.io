@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Infos WebServices</title>
-		<link rel="icon" type="image/png" href="./assets/img/Logo_ESILV_reduit.png">
+		<title>TP bitcoin</title>
+		<link rel="icon" type="image/png" href="../assets/img/Logo_ESILV_reduit.png">
 		<meta name="theme-color" content="#2196f3" />
 		
 		<!-- feuilles de style -->
-		<link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="./assets/css/material-kit.css"/>
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../assets/css/material-kit.css"/>
 		<link rel="stylesheet" type="text/css" href="https://blackrockdigital.github.io/startbootstrap-sb-admin/font-awesome/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -19,241 +19,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="theme-color" content="#2196f3" />
 		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-		<script type="text/javascript" src="jquery.min.js"></script>
-		<script type="text/javascript" src="./assets/js/qrcode.js">
-
-		</script>
-		<script>
-		var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = this.responseText;
-				var json = JSON.parse(myObj);
-				document.getElementById("bitcoin_block_number").innerHTML = json.height;
-				document.getElementById("bitcoin_network_hash").innerHTML = json.hash;
-				document.getElementById("bitcoin_blocks").innerHTML = json.time;
-				document.getElementById("medium_fees").innerHTML = json.medium_fee_per_kb;
-				document.getElementById("peer_count").innerHTML = json.peer_count;
-			}
-		};
-		
-		xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main", true);
-		xmlhttp.send();
-		
-		
-		var hash = document.getElementById("bitcoin_network_hash").textContent;
-		alert(hash);
-		
-		var xmlhttp2 = new XMLHttpRequest();
-			xmlhttp2.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = this.responseText;
-				var json = JSON.parse(myObj);
-				document.getElementById("transaction").innerHTML = json.total/100000000;
-			}
-		};
-		
-		
-		var url = "https://api.blockcypher.com/v1/btc/main/blocks/"+hash;
-		xmlhttp2.open("GET", url, true);
-		xmlhttp2.send();
-		
-		function selectChange()
-		{
-			
-			var selects = document.getElementById("mode_saisie");
-			
-			document.getElementById("adresse").placeholder = selects.options[selects.selectedIndex].text;
-			//alert(selects.options[selects.selectedIndex].value);// will gives u 2
-			//var selectedText = selects.options[selects.selectedIndex].text;// gives u value2
-		}
-		
-		
-		
-		function syntaxHighlight(json) {
-			json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-			return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-			var cls = 'number';
-			if (/^"/.test(match)) {
-				if (/:$/.test(match)) {
-					cls = 'key';
-				} else {
-					match = match.replace(/['"]+/g, '')
-					if(/^[0-9a-zA-Z]{34}$/.test(match))
-					{
-						match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"adresse"+'\')">'+match+'</a>';
-						cls = 'adresse';
-					} else if(/^[0-9a-fA-F]{64}$/.test(match))
-					{
-						var bool = true;
-						for(var i=0; i<5; i++)
-						{
-							if(match[i] != "0")
-							{
-								bool = false;
-							}
-						}
-						if(bool)
-						{
-							match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"hash_b"+'\')">'+match+'</a>';
-							cls = 'adresse';
-						}
-						else
-						{
-							match = '<a href="javascript:MiseAJourModal(\'' + match + '\',\''+"hash_tx"+'\')">'+match+'</a>';
-							cls = 'adresse';
-						}
-					} else{
-						
-						cls = 'string';
-					}
-					
-				}
-				} else if (/true|false/.test(match)) {
-					cls = 'boolean';
-				} else if (/null/.test(match)) {
-					cls = 'null';
-				} 
-				return '<span class="' + cls + '">' + match + '</span>';
-			});
-		}
-		
-
-		
-		function MiseAJourModal(var1, var2)
-		{
-		
-			var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() 
-				{
-					//$('#myModal').modal('hide');
-					if (this.readyState == 4) 
-					{
-						if(this.status == 200)
-						{
-							var myObj = this.responseText;
-							var json = JSON.stringify(JSON.parse(myObj),undefined,4);
-							
-							document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
-							$('#myModal').modal('show');
-						}
-						else
-						{
-							document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
-							$('#myModal').modal('show');
-						}
-					}
-					
-				};
-			if(var2 == "adresse")
-			{
-				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+var1, true);
-				xmlhttp.send();
-			} else if(var2 == "hash_b")
-			{
-				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+var1, true);
-				xmlhttp.send();
-			} else if(var2 == "hash_tx")
-			{
-				xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/txs/"+var1, true);
-				xmlhttp.send();
-			}
-			
-		}
-		
-		
-		
-		
-		function recherche()
-			{
-				
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() 
-				{
-					if (this.readyState == 4) 
-					{
-						if(this.status == 200)
-						{
-							var myObj = this.responseText;
-							var json = JSON.stringify(JSON.parse(myObj),undefined,4);
-							
-							document.getElementById("paragraphe").innerHTML = syntaxHighlight(json);
-							$('#myModal').modal('show');
-						}
-						else
-						{
-							document.getElementById("paragraphe").innerHTML = "Problème dans l'exécution de la requête http.";
-							$('#myModal').modal('show');
-						}
-					}
-					
-				};
-				var selects = document.getElementById("mode_saisie");
-				var valeur = selects.options[selects.selectedIndex].value;
-				var data = document.getElementById("adresse").value;
-				
-				if(valeur == "adresse")
-				{
-					var isadress = /^[0-9a-zA-Z]{34}$/.test(data);
-					if(isadress)
-					{
-						//output(syntaxHighlight(data));
-						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/addrs/"+data+"/balance", true);
-						xmlhttp.send();
-					}
-					else
-					{
-						document.getElementById("paragraphe").innerHTML = "Adresse invalide.";
-						$('#myModal').modal('show');
-					}
-				}
-				else if(valeur == "hash_tx")
-				{
-					var ishash = /^[0-9a-fA-F]{64}$/.test(data);
-					if(ishash)
-					{
-						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/txs/"+data, true);
-						xmlhttp.send();
-					}
-					else
-					{
-						document.getElementById("paragraphe").innerHTML = "Hash de transaction invalide.";
-						$('#myModal').modal('show');
-					}
-					
-				}
-				else if(valeur == "hash_b")
-				{
-					var ishash = /^[0-9a-fA-F]{64}$/.test(data);
-					if(ishash)
-					{
-						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+data, true);
-						xmlhttp.send();
-					}
-					else
-					{
-						document.getElementById("paragraphe").innerHTML = "Hash de block invalide.";
-						$('#myModal').modal('show');
-					}
-				}
-				else if(valeur == "index")
-				{
-					if(data == parseInt(data))
-					{
-						xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/"+document.getElementById("adresse").value+"?txstart=1&limit=1", true);
-						xmlhttp.send();
-					}
-					else
-					{
-						document.getElementById("paragraphe").innerHTML = "Index de block invalide.";
-						$('#myModal').modal('show');
-					}
-				}
-				
-			}
-		
-		</script>
-		
+		<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/js/qrcode.js"></script>
+		<script type="text/javascript" src="../assets/js/bitcoinScripts.js"></script>
 		
 	</head>
 	
@@ -278,7 +46,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="https://coupetmaxence.github.io/">
-						<img id="home" alt="Brand" src="./assets/img/home.png" >
+						<img id="home" alt="Brand" src="../assets/img/home.png" >
 					</a>
 				</div>
 				
@@ -292,7 +60,7 @@
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="./assets/img/Logo_ESILV.png" >
+								<img id="logo_esilv" alt="Brand" src="../assets/img/Logo_ESILV.png" >
 							</a> 
 						</li>
 					</ul>
@@ -327,13 +95,25 @@
 						<li class="active">
 							<a href="#information" role="tab" data-toggle="tab">
 								<i class="material-icons">info</i>
-								Informations du WebService
+								Informations
 							</a>
 						</li>
 						<li>
 							<a href="#rechercher" role="tab" data-toggle="tab">
 								<i class="material-icons">search</i>
-								Recherche d'informations
+								Recherche
+							</a>
+						</li>
+						<li>
+							<a href="#tab_qrcode" role="tab" data-toggle="tab">
+								<i class="material-icons">info</i>
+								QR Code
+							</a>
+						</li>
+						<li>
+							<a href="#bot" role="tab" data-toggle="tab">
+								<i class="material-icons">search</i>
+								Bot Telegram
 							</a>
 						</li>
 					</ul>
@@ -499,8 +279,33 @@
 							<div class="footer text-center">
 								<button id="bouton_search" class="btn btn-primary" onclick="recherche()">Rechercher</button>
 							</div>
-							<div id="qrcode"></div>
-
+						</div>
+						</div>
+						
+						
+						
+						<!--########################################################
+						#
+						#
+						#
+						#		Section affichant la page du qr code 
+						#
+						#
+						#
+						############################################################ -->
+						<div class="tab-pane text-center" id="tab_qrcode">
+							<div class="form">
+								<p>Entrer une adresse pour obtenir le QR code correspondant.</p>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="material-icons">language</i>
+									</span>
+									<input type="text" id="adresse_qrcode" class="form-control" placeholder="Adresse">
+								</div>
+								<div id="qrcode" style=" display:table; margin: 0 auto;"></div>
+								<div class="footer text-center">
+									<button id="bouton_search" class="btn btn-primary" onclick="CreerQR()">Générer le QR code</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -516,7 +321,7 @@
 						</li>
 						<li>
 							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-								<img alt="LinkedIn" class="logo" src="./assets/img/logo_linkedin.png" >
+								<img alt="LinkedIn" class="logo" src="../assets/img/logo_linkedin.png" >
 							</a>
 						</li>
 					</ul>
@@ -526,7 +331,7 @@
 		
 		
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" style="overflow-y: auto; max-height:75%;">
+			<div class="modal-dialog" style="overflow-y: auto; max-height:85%;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -547,17 +352,17 @@
 		<script src="./custom.js"></script>
 		
 		<!--   Core JS Files   -->
-		<script src="./assets/js/jquery.min.js" type="text/javascript"></script>
-		<script src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
-		<script src="./assets/js/material.min.js"></script>
+		<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../assets/js/material.min.js"></script>
 
 		<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-		<script src="./assets/js/nouislider.min.js" type="text/javascript"></script>
+		<script src="../assets/js/nouislider.min.js" type="text/javascript"></script>
 
 		<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-		<script src="./assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+		<script src="../assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
 		<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-		<script src="./assets/js/material-kit.js" type="text/javascript"></script>
+		<script src="../assets/js/material-kit.js" type="text/javascript"></script>
 	</body>
 </html>
