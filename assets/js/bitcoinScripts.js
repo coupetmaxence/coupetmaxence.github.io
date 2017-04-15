@@ -8,29 +8,13 @@ var xmlhttp = new XMLHttpRequest();
 				document.getElementById("bitcoin_blocks").innerHTML = json.time;
 				document.getElementById("medium_fees").innerHTML = json.medium_fee_per_kb;
 				document.getElementById("peer_count").innerHTML = json.peer_count;
+				document.getElementById("transaction").innerHTML = json.last_fork_hash;
 			}
 		};
 		
 		xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main", true);
 		xmlhttp.send();
 		
-		
-		var hash = document.getElementById("bitcoin_network_hash").textContent;
-		alert(hash);
-		
-		var xmlhttp2 = new XMLHttpRequest();
-			xmlhttp2.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = this.responseText;
-				var json = JSON.parse(myObj);
-				document.getElementById("transaction").innerHTML = json.total/100000000;
-			}
-		};
-		
-		
-		var url = "https://api.blockcypher.com/v1/btc/main/blocks/"+hash;
-		xmlhttp2.open("GET", url, true);
-		xmlhttp2.send();
 		
 		function selectChange()
 		{
@@ -204,11 +188,19 @@ var xmlhttp = new XMLHttpRequest();
 		
 	function CreerQR()
 			{
-				var qrcode = new QRCode(document.getElementById("qrcode"), {
-					width : 200,
-					height : 200
-				});
-				
-				qrcode.makeCode("zesdqsqsdqs");
-				document.getElementById("labelqr").innerHTML = "qr ok";
+				data = document.getElementById("adresse_qrcode").value;
+				var isadress = /^[0-9a-zA-Z]{34}$/.test(data);
+				if(isadress)
+				{
+					document.getElementById("qrcode").innerHTML = "";
+					var qrcode = new QRCode(document.getElementById("qrcode"), {
+						width : 200,
+						height : 200
+					});
+					qrcode.makeCode(data);
+				}
+				else
+				{
+					$('#ModalQR').modal('show');
+				}
 			}
