@@ -309,6 +309,37 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						
+						
+						<!--########################################################
+						#
+						#
+						#
+						#		Section affichant la page présentant le bot 
+						#
+						#
+						#
+						############################################################ -->
+						<div class="tab-pane text-center" id="bot">
+							<div class="form">
+								<p>Entrer une adresse pour obtenir le QR code correspondant.</p>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="material-icons">language</i>
+									</span>
+									<input type="text" id="adresse_qrcode" class="form-control" placeholder="Adresse">
+								</div>
+								<div id="qrcode" style=" display:table; margin: 0 auto;"></div>
+								<div class="footer text-center">
+									<button id="bouton_search" class="btn btn-primary" onclick="CreerQR()">Générer le QR code</button>
+								</div>
+							</div>
+						</div>
+						
+						
+						
 					</div>
 				</div>
 			</div>
