@@ -3152,3 +3152,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .null { color: magenta; }
 .key { color: red; }
 
+.titre {
+	margin-top:2em;
+	margin-bottom:2em;}
+
