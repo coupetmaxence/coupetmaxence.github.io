@@ -46,24 +46,32 @@
 			function debut_mesure() 
 			{
 				window.addEventListener("devicemotion", processmotiondisp, true);	
+				window.addEventListener("devicemotion", process, true);	
 				document.getElementById("lancer_mesure").disabled=true;
-				document.getElementById("bouton_activation").disabled = false;
-							
+				document.getElementById("bouton_activation").disabled = false;	
 			}
 			
 			
 			function ActivationMesure() 
 			{
-				
-				initialisation_temps(); 			
+				if(document.getElementById('alpha').innerHTML == "undefined")
+				{
+					alert("Votre appareil ne possède pas d'accéléromètre ni de gyroscope, impossible d'afficher des données");
+				}
+				else
+				{
+					initialisation_temps(); 			
 				window.addEventListener("devicemotion", processmotion, true);					
 				document.getElementById("bouton_activation").disabled = true;
 				document.getElementById("bouton_arret").disabled = false;
+				}
+				
 			}
 			
 			function Remise_a_zero()
 			{
-			window.removeEventListener("devicemotion", processmotion, true);			
+			window.removeEventListener("devicemotion", processmotion, true);	
+			window.removeEventListener("devicemotion", process, true);						
 			window.removeEventListener("devicemotion", processmotiondisp, true);
 			document.getElementById("bouton_arret").disabled = true;
 			document.getElementById("bouton_activation").disabled = true;
@@ -82,7 +90,8 @@
 			{
 				flag++;
 				debut= new Date().getTime();
-				window.removeEventListener("devicemotion", processmotion, true);			
+				window.removeEventListener("devicemotion", processmotion, true);	
+				window.removeEventListener("devicemotion", process, true);
 				window.removeEventListener("devicemotion", processmotiondisp, true);
 				document.getElementById("lancer_mesure").disabled = true ;
 				document.getElementById("bouton_activation").disabled = false;
@@ -117,7 +126,9 @@
 				var gamma = event.gamma;
 				
 				// Modification de la section orientation dans la page HTML
-				document.getElementById('orientation').innerHTML = "<ul><li>Alpha : " + alpha + "</li><li>Beta : " + beta + "</li><li>Gamma : " + gamma + "</li></ul>";
+				document.getElementById('alpha').innerHTML =  alpha;
+				document.getElementById('beta').innerHTML =  beta;
+				document.getElementById('gamma').innerHTML =  gamma;
 			}
 			
 			function processmotiondisp(event) {
@@ -128,10 +139,9 @@
 				tableau_donnees.push([x, y, z]);
 				
 				// Modification de la section acceleration dans la page HTML
-				document.getElementById("tangage").innerHTML =  x;
+				document.getElementById('x').innerHTML =  x;
 				document.getElementById('y').innerHTML =  y;
 				document.getElementById('z').innerHTML =  z;
-				alert(document.getElementById("tangage").innerHTML);
 				}	
 			
 			
@@ -145,11 +155,10 @@
 				dataDump.push([offset,x,y,z]);
 				
 				// Modification de la section acceleration dans la page HTML
-				document.getElementById("x").innerHTML =  x;
+				document.getElementById('x').innerHTML =  x;
 				document.getElementById('y').innerHTML =  y;
 				document.getElementById('z').innerHTML =  z;
-				document.getElementById('acceleration').innerHTML = "<ul><li>X : " + x + "</li><li>Y : " + y + "</li><li>Z : " + z + "</li></ul>";
-				document.getElementById('temps').innerHTML = "<ul><li>Temps : " + offset + "</li></ul>";
+				document.getElementById('temps').innerHTML = "Temps : " + offset/1000 + " secondes";
 			}
 		</script>	
 		
@@ -274,13 +283,13 @@
 											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
 										</div>
 										<div class="col-xs-9 text-right">
-											<h5>Angle de roulis</h5>
+											<h5>Angle &alpha;</h5>
 										</div>
 									</div>
 								</div>
 								<div class="panel-body">
 									<h4>
-										<span id="roulis"></span>
+										<span id="alpha"></span>
 									</h4>
 								</div>
 							</div>
@@ -293,13 +302,13 @@
 											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
 										</div>
 										<div class="col-xs-9 text-right">
-											<h5>Angle de tangage</h5>
+											<h5>Angle &beta;</h5>
 										</div>
 									</div>
 								</div>
 								<div class="panel-body">
 									<h4>
-										<span id="tangage"></span>
+										<span id="beta"></span>
 									</h4>
 								</div>
 							</div>
@@ -312,40 +321,26 @@
 											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
 										</div>
 										<div class="col-xs-9 text-right">
-											<h5>Angle de lacet</h5>
+											<h5>Angle &gamma;</h5>
 										</div>
 									</div>
 								</div>
 								<div class="panel-body">
 									<h4>
-										<span id="lacet"></span>
+										<span id="gamma"></span>
 									</h4>
 								</div>
 							</div>
 						</div>
-						<h4><p align="center">Temps : 345sec</p></h4>
-						<div id="acceleration"> <!-- La section pour afficher les données d'accélération. -->
-							<ul>
-								<li>X : </li>
-								<li>Y : </li>
-								<li>Z : </li>
-							</ul>
-						</div>
-						<div id="temps"> <!-- La section pour afficher les données d'accélération. -->
-							<ul>
-								<li>Temps : </li>
-							</ul>
-						</div>
+						<h4><p id="temps" align="center">Temps : 0 secondes</p></h4>
+						
 
 					
 						 
 						
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="material-icons">devices</i>
-						</span>
+					
 						<p class="texte_aligne">Choisir la marque du téléphone :</p>
-					</div>
+					
 					<div class="radio" id="marque">
 						<label>
 							<input type="radio" name="optionsRadios" value="Apple">
@@ -368,6 +363,12 @@
 						<label>
 							<input type="radio" name="optionsRadios" value="Huawei">
 							Huawei
+						</label>
+					</div>
+					<div class="radio" id="marque">
+						<label>
+							<input type="radio" name="optionsRadios" value="Autre">
+							Autre
 						</label>
 					</div>
                 				
@@ -424,13 +425,13 @@
 	
 	
 	
-	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="assets/js/material.min.js"></script>
+	<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../assets/js/material.min.js"></script>
 
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-	<script src="assets/js/material-kit.js" type="text/javascript"></script>
+	<script src="../assets/js/material-kit.js" type="text/javascript"></script>
 
     
 </html>
