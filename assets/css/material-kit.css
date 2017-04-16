@@ -2502,6 +2502,17 @@ word-wrap:break-word;
 	height: 15.8em;
     overflow-y: auto; 
  }
+ .acceleration {
+	 margin-top:3em;
+	 background-color: #448aff;
+	 height: 11em;
+    overflow-y: auto; 
+ }
+ .orientation {
+	 background-color: #448aff;
+	 height: 11em;
+    overflow-y: auto; 
+ }
 }
  
   .panel > .panel-heading, .panel.panel-default > .panel-heading {
@@ -2544,6 +2555,18 @@ word-wrap:break-word;
   .panel.panel-purple > .panel-body {
     background-color: #ba68c8;
 	color: #64008c;}
+  .panel.acceleration > .panel-heading {
+    background-color: #448aff;
+	color: #1a237e;}
+  .panel.acceleration > .panel-body {
+    background-color: #448aff;
+	color: #1a237e;}
+  .panel.orientation > .panel-heading {
+    background-color: #448aff;
+	color: #1a237e;}
+  .panel.orientation > .panel-body {
+    background-color: #448aff;
+	color: #1a237e;}
 	
   .panel.panel-primary > .panel-heading {
     background-color: #2196f3;}

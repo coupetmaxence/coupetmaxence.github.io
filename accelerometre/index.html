@@ -13,9 +13,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 	
 	<!-- CSS Files -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/material-kit.css" rel="stylesheet"/>
-	<link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/material-kit.css" rel="stylesheet"/>
+	<link href="../assets/css/demo.css" rel="stylesheet" />
 	
 		
 		<!-- Script javascript -->
@@ -45,7 +45,7 @@
 			
 			function debut_mesure() 
 			{
-				window.addEventListener("devicemotion", processdisp, true);	
+				window.addEventListener("devicemotion", processmotiondisp, true);	
 				document.getElementById("lancer_mesure").disabled=true;
 				document.getElementById("bouton_activation").disabled = false;
 							
@@ -64,7 +64,7 @@
 			function Remise_a_zero()
 			{
 			window.removeEventListener("devicemotion", processmotion, true);			
-			window.removeEventListener("devicemotion", processdisp, true);
+			window.removeEventListener("devicemotion", processmotiondisp, true);
 			document.getElementById("bouton_arret").disabled = true;
 			document.getElementById("bouton_activation").disabled = true;
 			document.getElementById("lancer_mesure").disabled=false;	
@@ -83,7 +83,7 @@
 				flag++;
 				debut= new Date().getTime();
 				window.removeEventListener("devicemotion", processmotion, true);			
-				window.removeEventListener("devicemotion", processdisp, true);
+				window.removeEventListener("devicemotion", processmotiondisp, true);
 				document.getElementById("lancer_mesure").disabled = true ;
 				document.getElementById("bouton_activation").disabled = false;
 				document.getElementById("bouton_send").style.display = "";
@@ -110,7 +110,17 @@
 				alert("Données envoyées");
 			}
 			
-			function processdisp(event) {
+			
+			function process(event) {
+				var alpha = event.alpha;
+				var beta = event.beta;
+				var gamma = event.gamma;
+				
+				// Modification de la section orientation dans la page HTML
+				document.getElementById('orientation').innerHTML = "<ul><li>Alpha : " + alpha + "</li><li>Beta : " + beta + "</li><li>Gamma : " + gamma + "</li></ul>";
+			}
+			
+			function processmotiondisp(event) {
 				var x = event.accelerationIncludingGravity.x;
 				var y = event.accelerationIncludingGravity.y;
 				var z = event.accelerationIncludingGravity.z;					
@@ -118,7 +128,10 @@
 				tableau_donnees.push([x, y, z]);
 				
 				// Modification de la section acceleration dans la page HTML
-				document.getElementById('acceleration').innerHTML = "<ul><li>X : " + x + "</li><li>Y : " + y + "</li><li>Z : " + z + "</li></ul>";
+				document.getElementById("tangage").innerHTML =  x;
+				document.getElementById('y').innerHTML =  y;
+				document.getElementById('z').innerHTML =  z;
+				alert(document.getElementById("tangage").innerHTML);
 				}	
 			
 			
@@ -132,6 +145,9 @@
 				dataDump.push([offset,x,y,z]);
 				
 				// Modification de la section acceleration dans la page HTML
+				document.getElementById("x").innerHTML =  x;
+				document.getElementById('y').innerHTML =  y;
+				document.getElementById('z').innerHTML =  z;
 				document.getElementById('acceleration').innerHTML = "<ul><li>X : " + x + "</li><li>Y : " + y + "</li><li>Z : " + z + "</li></ul>";
 				document.getElementById('temps').innerHTML = "<ul><li>Temps : " + offset + "</li></ul>";
 			}
@@ -162,7 +178,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="https://coupetmaxence.github.io/">
-						<img id="home" alt="Brand" src="./assets/img/home.png" >
+						<img id="home" alt="Brand" src="../assets/img/home.png" >
 					</a>
 				</div>
 				
@@ -176,7 +192,7 @@
 						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
 						<li> 
 							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="./assets/img/Logo_ESILV.png" >
+								<img id="logo_esilv" alt="Brand" src="../assets/img/Logo_ESILV.png" >
 							</a> 
 						</li>
 					</ul>
@@ -193,6 +209,121 @@
 				
 				<section>
 					<div class="container">
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel acceleration">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Accélération suivant x</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="x"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel acceleration">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Accélération suivant y</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="y"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel acceleration">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Accélération suivant z</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="z"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel orientation">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Angle de roulis</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="roulis"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel orientation">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Angle de tangage</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="tangage"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<div class="panel orientation">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<h5>Angle de lacet</h5>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<h4>
+										<span id="lacet"></span>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<h4><p align="center">Temps : 345sec</p></h4>
 						<div id="acceleration"> <!-- La section pour afficher les données d'accélération. -->
 							<ul>
 								<li>X : </li>
@@ -209,10 +340,12 @@
 					
 						 
 						
-					<div class="div_aligne">
-							<i class="material-icons image_aligne">devices</i>
-							<p class="texte_aligne">Choisir la marque du téléphone :</p>
-						</div>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="material-icons">devices</i>
+						</span>
+						<p class="texte_aligne">Choisir la marque du téléphone :</p>
+					</div>
 					<div class="radio" id="marque">
 						<label>
 							<input type="radio" name="optionsRadios" value="Apple">
@@ -277,7 +410,7 @@
 						</li>
 						<li>
 							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-								<img alt="LinkedIn" class="logo" src="./assets/img/logo_linkedin.png" >
+								<img alt="LinkedIn" class="logo" src="../assets/img/logo_linkedin.png" >
 							</a>
 						</li>
 					</ul>
