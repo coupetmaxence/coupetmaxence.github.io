@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Accéléromètre</title>
 		<link rel="icon" type="image/png" href="../assets/img/Logo_ESILV_reduit.png">
-		
+		<meta name="theme-color" content="#2196f3" />
 		
 		<!--     Fonts and icons     -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -158,7 +158,8 @@
 				document.getElementById('x').innerHTML =  x;
 				document.getElementById('y').innerHTML =  y;
 				document.getElementById('z').innerHTML =  z;
-				document.getElementById('temps').innerHTML = "Temps : " + offset/1000 + " secondes";
+				var secondes = offset/1000;
+				document.getElementById('temps').innerHTML = "Temps : " + secondes.toString().slice(0,4) + " secondes";
 			}
 		</script>	
 		
