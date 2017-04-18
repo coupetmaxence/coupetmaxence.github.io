@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Accéléromètre</title>
-		
+		<link rel="icon" type="image/png" href="../assets/img/Logo_ESILV_reduit.png">
 		
 		
 		<!--     Fonts and icons     -->
@@ -46,7 +46,7 @@
 			function debut_mesure() 
 			{
 				window.addEventListener("devicemotion", processmotiondisp, true);	
-				window.addEventListener("devicemotion", process, true);	
+				window.addEventListener("deviceorientation", process, true);	
 				document.getElementById("lancer_mesure").disabled=true;
 				document.getElementById("bouton_activation").disabled = false;	
 			}
@@ -54,7 +54,7 @@
 			
 			function ActivationMesure() 
 			{
-				if(document.getElementById('alpha').innerHTML == "undefined")
+				if(document.getElementById('alpha').innerHTML == "")
 				{
 					alert("Votre appareil ne possède pas d'accéléromètre ni de gyroscope, impossible d'afficher des données");
 				}
@@ -71,7 +71,7 @@
 			function Remise_a_zero()
 			{
 			window.removeEventListener("devicemotion", processmotion, true);	
-			window.removeEventListener("devicemotion", process, true);						
+			window.removeEventListener("deviceorientation", process, true);						
 			window.removeEventListener("devicemotion", processmotiondisp, true);
 			document.getElementById("bouton_arret").disabled = true;
 			document.getElementById("bouton_activation").disabled = true;
@@ -194,7 +194,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
-						<li><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a></li>
+						<li class="active"><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a></li>
 						<li><a href="https://coupetmaxence.github.io/spotnwalk/">Projet Spot&amp;Walk</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
