@@ -2502,13 +2502,13 @@ word-wrap:break-word;
 	height: 15.8em;
     overflow-y: auto; 
  }
- .acceleration {
+ .panel.acceleration {
 	 margin-top:3em;
 	 background-color: #448aff;
 	 height: 11em;
     overflow-y: auto; 
  }
- .orientation {
+ .panel.orientation {
 	 background-color: #448aff;
 	 height: 11em;
     overflow-y: auto; 

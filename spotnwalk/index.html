@@ -1,150 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Projet Spot&amp;Walk</title>
-		<link rel="icon" type="image/png" href="../assets/img/Logo_ESILV_reduit.png">
-		
-		
-		<!--     Fonts and icons     -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-	
-	<!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/material-kit.css" rel="stylesheet"/>
-	<link href="../assets/css/demo.css" rel="stylesheet" />
-	
-		
-		<!-- Script javascript -->
-		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-		<script>
-			var flag = 0;
-			var tableau_donnees = [];
-			var begin = new Date().getTime();					
-			var debut = new Date().getTime();
-			var fin = new Date().getTime();
-			var dataDump=[];
-			
-			function initialisation_temps()
-			{
-			if(flag == 0)
-			{
-				begin = new Date().getTime();
-				flag = 1;
-			}
-			else
-			{
-				fin = new Date().getTime();
-				begin = begin + fin - debut;
-			}
-			}
-			
-			function debut_mesure() 
-			{
-				window.addEventListener("devicemotion", processdisp, true);	
-				document.getElementById("lancer_mesure").disabled=true;
-				document.getElementById("bouton_activation").disabled = false;
-							
-			}
-			
-			
-			function ActivationMesure() 
-			{
-				
-				initialisation_temps(); 			
-				window.addEventListener("devicemotion", processmotion, true);					
-				document.getElementById("bouton_activation").disabled = true;
-				document.getElementById("bouton_arret").disabled = false;
-			}
-			
-			function Remise_a_zero()
-			{
-			window.removeEventListener("devicemotion", processmotion, true);			
-			window.removeEventListener("devicemotion", processdisp, true);
-			document.getElementById("bouton_arret").disabled = true;
-			document.getElementById("bouton_activation").disabled = true;
-			document.getElementById("lancer_mesure").disabled=false;	
-			document.getElementById("bouton_send").disabled=true;
-			flag = 0;
-			fin = new Date().getTime() ;
-			document.getElementById('temps').innerHTML = "<ul><li>Temps : " + 0 + "</li></ul>";
-			document.getElementById("bouton_raz").disabled = true;
-			
-			
-					
-			}
-			
-			function ArretMesure()
-			{
-				flag++;
-				debut= new Date().getTime();
-				window.removeEventListener("devicemotion", processmotion, true);			
-				window.removeEventListener("devicemotion", processdisp, true);
-				document.getElementById("lancer_mesure").disabled = true ;
-				document.getElementById("bouton_activation").disabled = false;
-				document.getElementById("bouton_send").style.display = "";
-				document.getElementById("bouton_send").disabled = false;
-				document.getElementById("bouton_arret").disabled = true;
-				document.getElementById("bouton_raz").disabled = false;
-			}
-			
-			function SendData()
-			{
-				var ar = new Object();
-				ar.action =  document.getElementById("type_mesure").value;
-				ar.phone =   $("form input[type='radio']:checked").val();		
-				ar.date =  new Date();
-				ar.measures = dataDump;
 
-				$.post( "http://ibo.labs.esilv.fr/~webservice/api/add ", 
-				{   username: "groupe56", 
-					password: "RmjL431", 
-					database: "groupe56", 
-					collection:"dataset",
-					data : JSON.stringify(ar)
-				});
-				alert("Données envoyées");
-			}
-			
-			function processdisp(event) {
-				var x = event.accelerationIncludingGravity.x;
-				var y = event.accelerationIncludingGravity.y;
-				var z = event.accelerationIncludingGravity.z;					
-				
-				tableau_donnees.push([x, y, z]);
-				
-				// Modification de la section acceleration dans la page HTML
-				document.getElementById('x') = x;
-				document.getElementById('y')= y;
-				document.getElementById('z') = z;
-				}	
-			
-			
-			function processmotion(event) {
-				var x = event.accelerationIncludingGravity.x;
-				var y = event.accelerationIncludingGravity.y;
-				var z = event.accelerationIncludingGravity.z;
-				var end = new Date();			
-				var offset = end - begin;// donne le nombre de milliseconds entre les deux dates.
-				tableau_donnees.push([offset, x, y, z]);
-				dataDump.push([offset,x,y,z]);
-				
-				// Modification de la section acceleration dans la page HTML
-				document.getElementById('x') = x;
-				document.getElementById('y')= y;
-				document.getElementById('z') = z;
-				document.getElementById('temps').innerHTML = "Temps : " + offset + " secondes";
-			}
-		</script>	
-	</head>
-		
-	<body>
-	
-	
-		<!--########################################################
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Projet Spot&amp;Walk</title>
+    <link rel="icon" type="image/png" href="../assets/img/Logo_ESILV_reduit.png">
+    <meta name="theme-color" content="#2196f3" />
+
+    <!--     Polices d'écriture et icones     -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <!-- fichiers css -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/material-kit.css" rel="stylesheet" />
+    <link href="../assets/css/demo.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <!--########################################################
 		#
 		#
 		#
@@ -153,262 +31,185 @@
 		#
 		#
 		############################################################ -->
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<!-- Groupe pour l'affichage sur mobile -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="https://coupetmaxence.github.io/">
-						<img id="home" alt="Brand" src="../assets/img/home.png" >
-					</a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a></li>
-						<li><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a></li>
-						<li class="active"><a href="https://coupetmaxence.github.io/spotnwalk/">Projet Spot&amp;Walk</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://www.creative-tim.com/license">Licenses</a></li>
-						<li> 
-							<a class="navbar-brand" href="http://www.esilv.fr/">
-								<img id="logo_esilv" alt="Brand" src="../assets/img/Logo_ESILV.png" >
-							</a> 
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		
-		
-		<div class="card card-signup" id="top">
-			<form class="form" method="" action="">
-				<div class="header header-primary text-center">
-					<h4>Projet Spot&amp;Walk</h4>
-				</div>
-				
-				<section>
-					<div class="container">
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel acceleration">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Accélération suivant x</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="x"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel acceleration">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Accélération suivant y</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="y"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel acceleration">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Accélération suivant z</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="z"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel orientation">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Angle &alpha;</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="alpha"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel orientation">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Angle &beta;</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="beta"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-12">
-							<div class="panel orientation">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-3">
-											<i class="material-icons" style="font-size:50px;">screen_rotation</i>
-										</div>
-										<div class="col-xs-9 text-right">
-											<h5>Angle &gamma;</h5>
-										</div>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h4>
-										<span id="gamma"></span>
-									</h4>
-								</div>
-							</div>
-						</div>
-						<h4><p id="temps" align="center">Temps : 0 secondes</p></h4>
-						
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Groupe pour l'affichage sur mobile -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://coupetmaxence.github.io/">
+                    <img id="home" alt="Brand" src="../assets/img/home.png">
+                </a>
+            </div>
 
-					
-						 
-						
-					
-						<p class="texte_aligne">Choisir la marque du téléphone :</p>
-					
-					<div class="radio" id="marque">
-						<label>
-							<input type="radio" name="optionsRadios" value="Apple">
-							Apple
-						</label>
-					</div>
-					<div class="radio" id="marque">
-						<label>
-							<input type="radio" name="optionsRadios" value="Samsung">
-							Samsung
-						</label>
-					</div>
-					<div class="radio" id="marque">
-						<label>
-							<input type="radio" name="optionsRadios" value="Sony">
-							Sony
-						</label>
-					</div>
-					<div class="radio" id="marque">
-						<label>
-							<input type="radio" name="optionsRadios" value="Huawei">
-							Huawei
-						</label>
-					</div>
-					<div class="radio" id="marque">
-						<label>
-							<input type="radio" name="optionsRadios" value="Autre">
-							Autre
-						</label>
-					</div>
-                				
-						
-						
-						
-						
-						
-	
-   <div class="input-group">
-								<span class="input-group-addon">
-									<i class="material-icons">info_outline</i>
-								</span>
-								<input type="text" id="type_mesure" class="form-control" placeholder="Type de la mesure">
-							</div>
-	<div class="text-center">
-	<button id="lancer_mesure" class="btn btn-primary" onclick="debut_mesure()">Lancer les mesures</button>
-	<button id="bouton_activation" class="btn btn-primary" onclick="ActivationMesure()">Enregistrer les mesures</button>
-	<button id="bouton_arret" class="btn btn-primary" onclick="ArretMesure()" disabled >Fin d'enregistrement</button>
-	</div>
-	
-				
-					</div>
-				</section>
-								
-				<div class="footer text-center">
-					<button id="bouton_send" class="btn btn-primary" onclick="SendData()" disabled>Envoyer les données</button>
-	
-	
-					<button id="bouton_raz" class="btn btn-primary" onclick="Remise_a_zero()"  disabled>Remettre à zéro</button>
-				</div>
-			</form>
-		</div>	
-		<footer class="footer">
-			<div class="container">
-				<nav class="pull-right">
-					<ul>
-						<li>
-							Retrouvez mon profil sur LinkedIn
-						</li>
-						<li>
-							<a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
-								<img alt="LinkedIn" class="logo" src="../assets/img/logo_linkedin.png" >
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</footer> 
-		
-	</body>
-	
-	
-	
-	
-	
-	<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
-	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="../assets/js/material.min.js"></script>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://coupetmaxence.github.io/bitcoin/">TP Bitcoin</a>
+                    </li>
+                    <li><a href="https://coupetmaxence.github.io/accelerometre/">TP Accéléromètre</a>
+                    </li>
+                    <li class="active"><a href="https://coupetmaxence.github.io/spotnwalk/">Projet Spot&amp;Walk</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://www.creative-tim.com/product/material-kit">&Agrave; propos</a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="http://www.esilv.fr/">
+                            <img id="logo_esilv" alt="Brand" src="../assets/img/Logo_ESILV.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 
-	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-	<script src="../assets/js/material-kit.js" type="text/javascript"></script>
+    <div class="card card-signup" id="top">
 
-    
+        <div class="header header-primary text-center">
+            <h4>Projet Spot&amp;Walk</h4>
+        </div>
+
+        <!-- Conteneur principal -->
+        <div class="container" id="div_header_info_ws">
+            <div class="nav-align-center">
+                <!-- Titres des sections -->
+                <ul class="nav nav-pills" role="tablist" id="nav_pill">
+                    <li class="active">
+                        <a href="#presentation" role="tab" data-toggle="tab">
+                            <i class="material-icons">info</i> Présentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#details" role="tab" data-toggle="tab">
+                            <i class="material-icons">search</i> Détails techniques
+                        </a>
+                    </li>
+                </ul>
+                <!-- Contenu des différentes sections -->
+                <div class="tab-content gallery">
+
+
+
+                    <!--########################################################
+						#
+						#
+						#
+						#		Section affichant les données du Webservice 
+						#
+						#
+						#
+						############################################################ -->
+                    <div class="tab-pane active" id="presentation">
+                        <h4 class="titre"><b>Description du projet</b></h4>
+
+                        <p>Spot&amp;Walk est une application ayant pour but de donnez un autre aspect au tourisme, en permettant à chacun des utlisateurs d'ajouter les liens qu'ils trouvent intéressants, et ainsi partager leurs bonnes adresses à toute la communauté.</p>
+
+                        <img src="../assets/img/logo_appli.png" width="200em" alt="logo_application" class="img-rounded" />
+                        <p>Logo de notre application</p>
+                        <p> </p>
+                        <p>Ce projet a été réalisé par un groupe de 5 étudiants de l'ESILV, qui ont travaillés sur différentes parties du projet et je me suis occupé de mon côté du dévellopement de l'application sur la plateforme Android.</p>
+                        <h4 class="titre"><b>Fonctionnalitées</b></h4>
+						
+						<div class="row">
+                                <div class="col-md-6 col-lg-4">
+									<img src="../assets/img/categories.png" alt="catégories" height="500em" class="img-rounded" />
+                                    <p>Répartition des lieux en catégories</p>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <img src="../assets/img/marqueurs.png" alt="marqueurs" height="500em" class="img-rounded" />
+                                    <p>Différents marqueurs pour chaque catégorie</p>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <img src="../assets/img/ajout_spot.png" alt="ajout spot" height="500em" class="img-rounded" />
+                                    <p>Possibilité d'ajouter ses lieux favoris</p>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <img src="../assets/img/ajout_parcours.png" alt="création de parcours" height="500em" class="img-rounded" />
+                                    <p>Création automatique de parcours</p>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <img src="../assets/img/parcours.png" alt="parcours" height="500em" class="img-rounded" />
+                                    <p>Exemple de parcours</p>
+                                </div>
+                            </div>
+						
+
+                    </div>
+
+
+
+
+
+                    <!--########################################################
+						#
+						#
+						#
+						#		Section affichant la page présentant le bot 
+						#
+						#
+						#
+						############################################################ -->
+                    <div class="tab-pane text-center" id="details">
+                        <div class="form">
+                            <h4 class="titre"><b>Bibliothèques utilisées</b></h4>
+                            <p>Cette application utilise les services d'API 
+								<a href="https://developers.google.com/maps/documentation/android-api/?hl=fr">Google Maps</a> fournit par Google pour Android. 
+								Elle utilise aussi une bibliothèque permettant de simplifier l'usage de l'API <a href="https://developers.google.com/maps/documentation/directions/?hl=fr">Directions</a> de Google, que vous pouvez retrouver avec ce <a href="https://github.com/akexorcist/Android-GoogleDirectionLibrary">lien</a>.
+
+                            <p>Voici un lien vers mon <a href="https://github.com/coupetmaxence/Telegram-Bot">répertoire github personnel</a> contenant les fichiers sources de l'application. </p>
+
+                            <h4 class="titre"><b>Fonctionnement de l'application</b></h4>
+                            <p>Nous disposons d'une base de données (MySQL) hébergée gratuitement sur les serveurs de ce <a href="https://www.alwaysdata.com/fr/">service</a>, contenant toutes les informations sur les lieux répertoriés sur notre application.
+							 &Agrave; l'aide de plusieurs scripts php eux aussi hébergés sur les serveurs d'AlwaysData, l'application récupère ces données au format JSON via des requettes, et traite ces données pour les afficher sur la carte.</p>
+                            <p>Pour l'ajout de lieux sur la carte par l'utilisateur lui-même, le fonctionnement est exactement le même mais dans le sens inverse : l'application envoie à la base de données les lieux à ajouter.</p>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <nav class="pull-right">
+                <ul>
+                    <li>
+                        Retrouvez mon profil sur LinkedIn
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="https://fr.linkedin.com/in/maxence-coupet-29a045135">
+                            <img alt="LinkedIn" class="logo" src="../assets/img/logo_linkedin.png">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+
+
+
+
+
+<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/material.min.js"></script>
+
+
+<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+<script src="../assets/js/material-kit.js" type="text/javascript"></script>
+
+
 </html>
