@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -148,7 +148,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="bitcoin_block_number"></span>
+											
+												<span id="bitcoin_block_number">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -167,7 +168,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="bitcoin_network_hash"></span>
+											
+												<span id="bitcoin_network_hash">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -186,7 +188,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="bitcoin_blocks"></span>
+											
+												<span id="bitcoin_blocks">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -205,7 +208,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="medium_fees"></span>
+											
+												<span id="medium_fees">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -224,7 +228,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="peer_count"></span>
+											
+												<span id="peer_count">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -243,7 +248,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <h4>
-												<span id="transaction"></span>
+											
+												<span id="transaction">0</span>
 											</h4>
                                     </div>
                                 </div>
@@ -263,7 +269,7 @@
                     <div class="tab-pane text-center" id="rechercher">
                         <div class="form">
                             <div class="input-group" style="margin:auto">
-                                <label for="sel1">Choisir le mode de recherche :</label>
+                                <label>Choisir le mode de recherche :</label>
                                 <select class="form-control" id="mode_saisie" onchange="selectChange()">
                                     <option value="adresse">Adresse</option>
                                     <option value="hash_tx">Hash de transaction</option>
@@ -305,7 +311,7 @@
                             </div>
                             <div id="qrcode" style=" display:table; margin: 0 auto;"></div>
                             <div class="footer text-center">
-                                <button id="bouton_search" class="btn btn-primary" onclick="CreerQR()">Générer le QR code</button>
+                                <button class="btn btn-primary" onclick="CreerQR()">Générer le QR code</button>
                             </div>
                         </div>
                     </div>
@@ -337,26 +343,26 @@
                             <h4 class="titre"><b>III. Galerie</b></h4>
                             <div class="row">
                                 <div class="col-md-6 col-lg-4">
-                                    <video height="492em" controls>
-                                        <source src="../assets/vid/movie.mp4" type="video/mp4">
+                                    <video height="492" controls>
+                                        <source src="../assets/vid/movie.mp4" alt="video presentation" type="video/mp4">
                                             Votre navigateur ne supporte pas la lecture vidéo.
                                     </video>
                                     <p>Vidéo d'utilisation du bot</p>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
-                                    <img src="../assets/img/bot.png" height="500em" class="img-rounded" />
+                                    <img src="../assets/img/bot.png" alt="bot" height="500" class="img-rounded" />
                                     <p>Commandes /balance et /ticker</p>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
-                                    <img src="../assets/img/bot_historic.png" height="500em" class="img-rounded" />
+                                    <img src="../assets/img/bot_historic.png" alt="/historic" height="500" class="img-rounded" />
                                     <p>Commande /historic</p>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
-                                    <img src="../assets/img/bot_conversion.png" height="500em" class="img-rounded" />
+                                    <img src="../assets/img/bot_conversion.png" alt="conversation" height="500" class="img-rounded" />
                                     <p>Commande /convert</p>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
-                                    <img src="../assets/img/bot_conversion_keyboard.png" height="500em" class="img-rounded" />
+                                    <img src="../assets/img/bot_conversion_keyboard.png" alt="/convert" height="500" class="img-rounded" />
                                     <p>Commande /convert (clavier spécial)</p>
                                 </div>
                             </div>
