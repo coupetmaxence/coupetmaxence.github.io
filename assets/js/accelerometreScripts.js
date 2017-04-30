@@ -45,7 +45,7 @@ function Remise_a_zero() {
     document.getElementById("bouton_send").disabled = true;
     flag = 0;
     fin = new Date().getTime();
-    document.getElementById('temps').innerHTML = "<h4>Temps : " + 0 + "</h4>";
+    document.getElementById('temps').innerHTML = "Temps : " + 0 + " secondes";
     document.getElementById("bouton_raz").disabled = true;
 
 
@@ -123,5 +123,5 @@ function processmotion(event) {
     document.getElementById('y').innerHTML = y;
     document.getElementById('z').innerHTML = z;
     var secondes = offset / 1000;
-    document.getElementById('temps').innerHTML = "<h4>Temps : " + secondes.toString().slice(0, 4) + " secondes</h4>";
+    document.getElementById('temps').innerHTML = "Temps : " + secondes.toString().slice(0, 4) + " secondes";
 }
