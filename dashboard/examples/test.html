@@ -32,6 +32,7 @@
             } else {
                wsuri = wsproto + "://" + window.location.hostname + ":8080/ws";
             }
+			wsuir = "wss://89.234.182.19:9000";
             if ("WebSocket" in window) {
                sock = new WebSocket(wsuri);
             } else if ("MozWebSocket" in window) {
