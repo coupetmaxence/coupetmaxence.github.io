@@ -28,15 +28,6 @@
 			$(".product_type_btn").html('Capital Protection Certificate<span class="caret"></span>');
 			$(".solve_type_btn").html('Coupon<span class="caret"></span>');
 			$(".maturity_type_btn").html('6 months<span class="caret"></span>');
-			var socket = new WebSocket("wss://89.234.182.19:9000");
-			socket.onopen = function (event) {
-				console.log("ok");
-				socket.send("eee"); 
-			};
-			socket.onmessage = function (event) {
-			  alert(event.data);
-			  
-			}
 			console.log("init");
 		}
 	</script>
@@ -97,9 +88,9 @@
 		{
 			var values = getSelectValues(document.getElementById("ISIN"));
 			
-			var socket = new WebSocket("wss://89.234.182.19:9000");
+			var socket = new WebSocket("ws://89.234.182.19:8765");
 			
-			/*socket.onopen = function (event) {
+			socket.onopen = function (event) {
 				var json_message = {
 										"meta" : {
 													"timestamp" : "null",
@@ -114,13 +105,11 @@
 												}
 									}
 				socket.send(JSON.stringify(json_message)); 
-			};*/
+			};
 			socket.onmessage = function (event) {
-			  alert(event.data);
-			  //var response = JSON.parse(event.data);
-			  //document.getElementById("price").innerHTML = "<br>"+response.data.price;
+			  var response = JSON.parse(event.data);
+			  document.getElementById("price").innerHTML = "<br>"+response.data.price;
 			}
-			alert("fin");
 		}
 	</script>
 </head>
